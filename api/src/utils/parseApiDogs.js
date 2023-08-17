@@ -22,7 +22,7 @@ function parseApiDog(apiDog, client) {
         life_span: apiDog.life_span,
         image:
             (client === "dogs" && apiDog.image.url) ||
-            (client === "dogsByName" && apiDog.image) ||
+            (client === "dogsByName" && apiDog.image.url) ||
             (client === "dogById" &&
                 `https://cdn2.thedogapi.com/images/${apiDog.reference_image_id}.jpg`),
         temperaments: parseTemperaments(apiDog.temperament),
