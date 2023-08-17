@@ -1,5 +1,19 @@
-const { getAllDogs, createDog } = require("../controllers/dogsController.js");
+const {
+    getAllDogs,
+    createDog,
+    getDogById,
+    getDogByName,
+} = require("../controllers/dogsController.js");
 const { dogBodyParser } = require("../utils/dogBodyParser.js");
+async function getByIdHandler(req, res) {
+    try {
+        const id = req.params.id;
+        const dog = await getDogById(id);
+        res.status(200).json(dog);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+}
 
 async function createHandler(req, res) {
     try {
@@ -13,6 +27,9 @@ async function createHandler(req, res) {
 
 async function getAllHandler(req, res) {
     try {
+        if (req.query.name) {
+            return getByNameHandler(req, res);
+        }
         const order = req.query.order || "name";
         const orderDirection = order.startsWith("-") ? "DESC" : "ASC";
         const orderBy = order.startsWith("-") ? order.slice(1) : order;
@@ -27,8 +44,8 @@ async function getAllHandler(req, res) {
 }
 async function getByNameHandler(req, res) {
     try {
-        const name = req.params.name;
-        const dog = await getByName(name);
+        const name = req.query.name;
+        const dog = await getDogByName(name);
         res.status(200).json(dog);
     } catch (error) {
         res.status(400).send({ error: error.message });
@@ -38,4 +55,6 @@ async function getByNameHandler(req, res) {
 module.exports = {
     createHandler,
     getAllHandler,
+    getByIdHandler,
+    getByNameHandler,
 };

@@ -1,5 +1,5 @@
 const { Temperament } = require("../db");
-const parseApiDogs = require("../utils/parseApiDogs");
+const { parseApiDogs } = require("../utils/parseApiDogs");
 const axios = require("axios");
 require("dotenv").config();
 
@@ -9,40 +9,37 @@ let isFirstRun = true;
 async function getAllTemperaments() {
     try {
         if (!isFirstRun) {
-            const temperaments = await Temperament.findAll({
-                attributes: ["name"],
-                order: [["name", "ASC"]],
-            });
-            const orderedTemperaments = temperaments.map(
-                (temperament) => temperament.name
-            );
-            return {
-                temperaments: orderedTemperaments,
-                message: `${temperaments.length} temperaments found in database`,
-            };
+            return await grabTemperamentsFromDB();
         } else {
             isFirstRun = false;
+        }
+
+        let dbTemperaments = await grabTemperamentsFromDB();
+
+        if (dbTemperaments.length > 0) {
+            return {
+                temperaments: dbTemperaments,
+                message: `${dbTemperaments.length} temperaments found in database`,
+            };
         }
 
         const url = `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`;
         const apiDogs = await axios.get(url);
         const dogTemperaments = parseApiDogs(apiDogs.data, "temperaments");
-        const allTemperaments = [];
 
-        for (const dog of dogTemperaments) {
-            if (dog.temperaments.length > 0) {
-                allTemperaments.push(...dog.temperaments);
+        let allTemperaments = [];
+        for (let temperament of dogTemperaments) {
+            if (temperament.temperaments) {
+                allTemperaments.push(...temperament.temperaments.split(", "));
             }
         }
 
-        const uniqueTemperaments = [...new Set(allTemperaments)];
+        let uniqueTemperaments = Array.from(new Set(allTemperaments));
 
         await Temperament.bulkCreate(
             uniqueTemperaments.map((temperament) => ({ name: temperament })),
             { updateOnDuplicate: ["name"] }
         );
-
-        uniqueTemperaments.sort();
 
         return {
             temperaments: uniqueTemperaments,
@@ -56,3 +53,15 @@ async function getAllTemperaments() {
 module.exports = {
     getAllTemperaments,
 };
+
+async function grabTemperamentsFromDB() {
+    const temperaments = await Temperament.findAll({
+        attributes: ["name", "id"],
+        order: [["name", "ASC"]],
+    });
+    const orderedTemperaments = temperaments.map((temperament) => temperament);
+    return {
+        temperaments: orderedTemperaments,
+        message: `${temperaments.length} temperaments found in database`,
+    };
+}

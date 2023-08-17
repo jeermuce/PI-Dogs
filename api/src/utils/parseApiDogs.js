@@ -1,24 +1,32 @@
 function parseApiDogs(apiDogs, client) {
-    function parseTemperaments(temperaments) {
-        return !!temperaments && (temperamentsArray = temperaments.split(", "));
-    }
     return apiDogs.map((dog) => {
-        if (client === "dogs")
+        if (client === "dogs" || client === "dogsByName") {
+            return parseApiDog(dog, client);
+        } else if (client === "temperaments")
             return {
-                id: dog.id,
-                name: dog.name,
-                weight: dog.weight.metric,
-                weight_imperial: dog.weight.imperial,
-                height: dog.height.metric,
-                height_imperial: dog.height.imperial,
-                life_span: dog.life_span,
-                image: dog.image.url,
-                temperaments: parseTemperaments(dog.temperament),
-            };
-        else if (client === "temperaments")
-            return {
-                temperaments: parseTemperaments(dog.temperament),
+                temperaments: dog.temperament,
             };
     });
 }
-module.exports = { parseApiDogs };
+function parseTemperaments(temperaments, client) {
+    return !!temperaments && (temperamentsArray = temperaments.split(", "));
+}
+function parseApiDog(apiDog, client) {
+    return {
+        id: apiDog.id,
+        name: apiDog.name,
+        weight: apiDog.weight.metric,
+        weight_imperial: apiDog.weight.imperial,
+        height: apiDog.height.metric,
+        height_imperial: apiDog.height.imperial,
+        life_span: apiDog.life_span,
+        image:
+            (client === "dogs" && apiDog.image.url) ||
+            (client === "dogsByName" && apiDog.image) ||
+            (client === "dogById" &&
+                `https://cdn2.thedogapi.com/images/${apiDog.reference_image_id}.jpg`),
+        temperaments: parseTemperaments(apiDog.temperament),
+    };
+}
+
+module.exports = { parseApiDogs, parseApiDog };

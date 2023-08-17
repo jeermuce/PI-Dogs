@@ -2,31 +2,51 @@ const { Dog, Temperament } = require("../db");
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
-const { parseApiDogs } = require("../utils/parseApiDogs");
+const { parseApiDogs, parseApiDog } = require("../utils/parseApiDogs");
+const { Op } = require("sequelize");
 
-const dogCache = {};
+let dogCache = {};
 let apiCache = {};
 let isFirstRun = true;
 let aDogHasBeenCreated = false;
 
-async function getAllDogs(orderBy, orderDirection, page, limit) {
+async function getDogById(id) {
     try {
-        const offset = (page - 1) * limit;
-        const cacheKey = `${orderBy}-${orderDirection}`;
-        if (!isFirstRun && !aDogHasBeenCreated && !!dogCache[cacheKey]) {
-            return dogCache[cacheKey];
+        if (!Number(id)) {
+            let dog = await Dog.findByPk(id, {
+                include: {
+                    model: Temperament,
+                    attributes: ["name"],
+                    through: {
+                        attributes: [],
+                    },
+                },
+            });
+            console.log(dog);
+            dog = parseDbDog(dog.dataValues);
+            return dog;
         }
-        let dogs = [];
-        if (apiCache[cacheKey]) {
-            dogs = apiCache[cacheKey];
-        } else {
-            const url = `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`;
-            dogs = await axios.get(url);
-            dogs = parseApiDogs(dogs.data, "dogs");
-            apiCache[cacheKey] = dogs;
-        }
+        const url = `https://api.thedogapi.com/v1/breeds/${id}?api_key=${API_KEY}`;
 
-        let dbDogs = await Dog.findAll({
+        let dog = await axios.get(url);
+        dog = parseApiDog(dog.data, "dogById");
+        return dog;
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getDogByName(name) {
+    try {
+        //look for the dog in the db and bring all matches, look for the dog in the api,
+        //put the results together and return them
+        //if not found in either, return an error
+        let dogs = await Dog.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: `%${name}%`,
+                },
+            },
             include: {
                 model: Temperament,
                 attributes: ["name"],
@@ -35,14 +55,71 @@ async function getAllDogs(orderBy, orderDirection, page, limit) {
                 },
             },
         });
+        dogs = dogs.map((dog) => dog.dataValues);
+        let parsedDbDogs = dogs.map((dog) => {
+            return parseDbDog(dog);
+        });
+
+        const url = `https://api.thedogapi.com/v1/breeds/search?q=${name}&api_key=${API_KEY}`;
+        let apiDogs = await axios.get(url);
+        apiDogs = parseApiDogs(apiDogs.data, "dogsByName");
+        !parsedDbDogs.length && (parsedDbDogs = ["No matches in DB"]);
+        !apiDogs.length && (apiDogs = ["No matches in API"]);
+
+        dogs = [...parsedDbDogs, ...apiDogs];
+        dogs.sort();
+
+        return dogs;
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getAllDogs(orderBy, orderDirection, page, limit) {
+    try {
+        const offset = (page - 1) * limit;
+        let cacheKey = `${orderBy}-${orderDirection}`;
+
+        let dogs = [];
+        if (aDogHasBeenCreated) {
+            dogCache = {};
+        }
+
+        allDataFrom = "db and api";
+        if (!isFirstRun && !aDogHasBeenCreated) {
+            //the cache s full if it's not the first run and no dog has been created
+            allDataFrom = "dogsCache";
+            aDogHasBeenCreated = false;
+            return dogCache[cacheKey];
+        } else if (apiCache[cacheKey]) {
+            apiDataFrom = "apiCache";
+            dogs = apiCache[cacheKey];
+        } else {
+            const url = `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`;
+            dogs = await axios.get(url);
+            dogs = parseApiDogs(dogs.data, "dogs");
+            apiCache[cacheKey] = dogs;
+            apiDataFrom = "api";
+            isFirstRun = false;
+        }
+
+        let dbDogs = await Dog.findAll({
+            order: [[orderBy, orderDirection]],
+            include: {
+                model: Temperament,
+                attributes: ["name"],
+                through: {
+                    attributes: [],
+                },
+            },
+            offset,
+            limit,
+        });
         dbDogs = dbDogs.map((dog) => dog.dataValues);
 
         const parsedDbDogs = dbDogs.map((dog) => {
             return parseDbDog(dog);
         });
-
-        dogs.push(...parsedDbDogs);
-
         dogs.sort((a, b) => {
             if (orderDirection === "ASC") {
                 return a[orderBy] > b[orderBy] ? 1 : -1;
@@ -50,8 +127,10 @@ async function getAllDogs(orderBy, orderDirection, page, limit) {
                 return a[orderBy] < b[orderBy] ? 1 : -1;
             }
         });
+        dogs.unshift(...parsedDbDogs);
 
         isFirstRun = false;
+        aDogHasBeenCreated = false;
         dogCache[cacheKey] = dogs;
 
         return dogs;
@@ -140,7 +219,10 @@ function parseDbDog(dog) {
         temperaments: parsedTemperaments,
     };
 }
+
 module.exports = {
     getAllDogs,
     createDog,
+    getDogById,
+    getDogByName,
 };
