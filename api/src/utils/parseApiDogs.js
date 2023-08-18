@@ -1,32 +1,48 @@
 function parseApiDogs(apiDogs, client) {
-    return apiDogs.map((dog) => {
-        if (client === "dogs" || client === "dogsByName") {
-            return parseApiDog(dog, client);
-        } else if (client === "temperaments")
-            return {
-                temperaments: dog.temperament,
-            };
-    });
+    try {
+        const parsedDogs = [];
+        for (let i = 0; i < apiDogs.length; i++) {
+            const dog = apiDogs[i];
+            if (client === "dogs" || client === "dogsByName") {
+                parsedDogs.push(parseApiDog(dog, client));
+            } else if (client === "temperaments") {
+                parsedDogs.push({
+                    temperaments: dog.temperament,
+                });
+            }
+        }
+        return parsedDogs;
+    } catch (error) {
+        throw error;
+    }
 }
-function parseTemperaments(temperaments, client) {
-    return !!temperaments && (temperamentsArray = temperaments.split(", "));
+
+function parseTemperaments(temperaments) {
+    return !!temperaments ? temperaments.split(", ") : [];
 }
+
 function parseApiDog(apiDog, client) {
-    return {
-        id: apiDog.id,
-        name: apiDog.name,
-        weight: apiDog.weight.metric,
-        weight_imperial: apiDog.weight.imperial,
-        height: apiDog.height.metric,
-        height_imperial: apiDog.height.imperial,
-        life_span: apiDog.life_span,
-        image:
-            (client === "dogs" && apiDog.image.url) ||
-            (client === "dogsByName" && apiDog.image.url) ||
-            (client === "dogById" &&
-                `https://cdn2.thedogapi.com/images/${apiDog.reference_image_id}.jpg`),
-        temperaments: parseTemperaments(apiDog.temperament),
-    };
+    try {
+        let image;
+        if (client === "dogs" || client === "dogsByName") {
+            image = apiDog.image.url;
+        } else if (client === "dogById") {
+            image = `https://cdn2.thedogapi.com/images/${apiDog.reference_image_id}.jpg`;
+        }
+        return {
+            id: apiDog.id,
+            name: apiDog.name,
+            weight: apiDog.weight.metric,
+            weight_imperial: apiDog.weight.imperial,
+            height: apiDog.height.metric,
+            height_imperial: apiDog.height.imperial,
+            life_span: apiDog.life_span,
+            image,
+            temperaments: parseTemperaments(apiDog.temperament),
+        };
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = { parseApiDogs, parseApiDog };
