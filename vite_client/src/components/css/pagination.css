@@ -1,0 +1,5 @@
+.pagination {
+    grid-area: pagination;
+    background-color: green;
+    height: 100%;
+}

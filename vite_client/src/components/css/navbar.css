@@ -1,0 +1,35 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2rem;
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+}
+.unitSelector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1rem;
+}
+.unitButton {
+    background-color: var(--secondary);
+    color: var(--text);
+    border: none;
+    border-radius: 0.3rem;
+    height: 1.7rem;
+    aspect-ratio: 1;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    cursor: pointer;
+    transition: none;
+}
+.unitButton:hover {
+    background-color: var(--secondary);
+    color: var(--text);
+    scale: 1.1;
+}

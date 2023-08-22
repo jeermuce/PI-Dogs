@@ -1,0 +1,56 @@
+#root {
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    --card_width: 10rem;
+    --card_height: 17rem;
+}
+.App {
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+button {
+    background-color: var(--primary);
+    min-width: fit-content;
+    max-width: 20%;
+    transition: background-color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+    cursor: pointer;
+    border-radius: 0.6rem;
+}
+button:hover {
+    background-color: var(--primary-hover);
+    color: var(--text-hover);
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.button-s {
+    background-color: var(--secondary);
+}
+.button-s:hover {
+    background-color: var(--secondary-hover);
+}
+a {
+    color: var(--secondary);
+    transition: color 0.2s ease-in-out;
+}
+a:hover {
+    color: var(--text);
+}
+.emptyDivNav {
+    grid-area: nav;
+    height: 2rem;
+}

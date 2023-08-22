@@ -1,0 +1,43 @@
+.card {
+    height: 17rem;
+    width: 10rem;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-items: center;
+    background-color: var(--primary);
+    font-size: small;
+    margin: 1rem;
+    border: red solid;
+}
+.image {
+    width: 7rem;
+    margin: 0.7rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+.name {
+    font-size: medium;
+    font-weight: bold;
+    margin: 0rem;
+}
+.temperaments {
+    font-size: small;
+    margin: 0rem;
+}
+.weight {
+    font-size: small;
+    margin: 0rem;
+}
+
+/*             <img src={dog.image} alt={dog.name} className="image" />
+            <h1 className="name">{dog.name}</h1>
+            <h2 className="temperaments">
+                {dog.temperaments.map((t) => t + ", ")}
+            </h2>
+            {units === "metric" ? (
+                <h3 className="weight">{dog.weight} kg</h3>
+            ) : (
+                <h3 className="weight">{dog.weight_imperial} lbs</h3>
+            )} */

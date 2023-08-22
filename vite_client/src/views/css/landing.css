@@ -1,0 +1,22 @@
+.landing {
+    background-image: url("https://wallpapercave.com/wp/n6aIVaz.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.homeButton {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: xx-large;
+    font-weight: bold;
+    text-decoration: wavy;
+    text-align: center;
+}
+/* https://wallpapercave.com/wp/n6aIVaz.jpg */

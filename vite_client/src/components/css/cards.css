@@ -1,0 +1,19 @@
+.box {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(calc(var(--card_width) + 2rem), 1fr)
+    );
+    grid-template-rows: repeat(
+        auto-fit,
+        minmax(calc(var(--card_width) * 1.7), 1fr)
+    );
+    width: fit-content;
+    min-width: 100%;
+    height: 100%;
+    background-color: #e01052;
+    scrollbar-width: thin;
+    background-color: red;
+    padding-bottom: 1rem;
+    grid-area: cards;
+}

@@ -1,0 +1,74 @@
+:root {
+    /************* Light Palette *************/
+    --text-light: #060405;
+    --text-light-hover: #f0ebec;
+
+    --background-light: #f0ebec;
+
+    --primary-light: #e4587d;
+    --primary-light-hover: #bb3a5d;
+
+    --secondary-light: #c4adcf;
+    --secondary-light-hover: #562564;
+
+    --accent-light: #1a7c87;
+    /************* Dark Palette *************/
+    --text-dark: #f0ebec;
+    --text-dark-hover: #060405;
+
+    --background-dark: #060405;
+
+    --primary-dark: #bb3a5d;
+    --primary-dark-hover: #e4587d;
+
+    --secondary-dark: #562564;
+    --secondary-dark-hover: #c4adcf;
+
+    --accent-dark: #5bd2df;
+    /* ************* Common ************* */
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --text-hover: var(--text-dark-hover);
+    --primary: var(--primary-dark);
+    --primary-hover: var(--primary-dark-hover);
+    --secondary: var(--secondary-dark);
+    --secondary-hover: var(--secondary-dark-hover);
+    --accent: var(--accent-dark);
+
+    color-scheme: light dark;
+    color: var(--text);
+    background-color: var(--background);
+    box-sizing: border-box;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+h1 {
+    margin-top: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+    background-color: var(--background);
+    height: 10rem;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --background: var(--background-light);
+        --text: var(--text-light);
+        --text-hover: var(--text-light-hover);
+        --primary: var(--primary-light);
+        --primary-hover: var(--primary-light-hover);
+        --secondary: var(--secondary-light);
+        --secondary-hover: var(--secondary-light-hover);
+        --accent: var(--accent-light);
+    }
+}
