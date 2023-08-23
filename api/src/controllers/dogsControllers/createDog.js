@@ -59,17 +59,6 @@ async function createDog(dog, aDogHasBeenCreated) {
                     attributes: [],
                 },
             },
-            attributes: {
-                include: [
-                    name,
-                    height,
-                    height_imperial,
-                    weight,
-                    weight_imperial,
-                    life_span,
-                    image,
-                ],
-            },
         });
 
         createdDog = parseDbDog(createdDog.dataValues);

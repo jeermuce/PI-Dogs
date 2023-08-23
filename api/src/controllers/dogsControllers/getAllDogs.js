@@ -58,6 +58,7 @@ async function getAllDogs(
                 "weight_imperial",
                 "height",
                 "height_imperial",
+                "life_span",
             ],
             include: {
                 model: Temperament,
