@@ -1,20 +1,22 @@
 .card {
     height: 17rem;
-    width: 10rem;
-    max-width: 20rem;
     border-radius: 0.6rem;
     border: solid 0.1rem var(--accent);
     display: flex;
     flex-flow: column nowrap;
     justify-content: start;
     align-items: center;
-    background-color: var(--secondary);
-    font-size: small;
-    margin: 1rem;
+    background-color: var(--primary);
+    height: 100%;
+    /*
+    width: 10rem;
+    max-width: 20rem;
+    margin: 1rem; */
 }
 .cardImage {
-    width: 7rem;
+    width: 70%;
     margin: 0.7rem;
+    border-radius: 0.6rem;
     aspect-ratio: 1;
     object-fit: cover;
     object-position: top;
@@ -22,11 +24,11 @@
 .cardData {
     display: flex;
     flex-flow: column nowrap;
-    height: 45%;
-    justify-content: space-between;
+    height: fit-content;
+    max-height: 45%;
+    color: var(--text);
+    justify-content: flex-start;
     align-items: center;
-    background-color: var(--primary);
-    border-radius: 0.6rem;
     font-size: small;
     margin: 0rem;
     text-align: center;

@@ -1,14 +1,11 @@
 .box {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(calc(var(--card_width) + 2rem), 1fr)
-    );
-    grid-template-columns: repeat();
-    grid-auto-rows: minmax(calc(var(--card_width) * 1.7), 1fr);
-    grid-gap: 1.5rem;
-    width: fit-content;
-    min-width: 100%;
     scrollbar-width: thin;
     overflow-y: scroll;
+    min-width: 100%;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+    box-sizing: border-box;
 }

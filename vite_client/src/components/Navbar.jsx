@@ -28,16 +28,6 @@ function Navbar() {
     const toggleFilters = () => {
         setShowFilters(!showFilters);
     };
-    function shouldRenderUnits() {
-        if (
-            currentlyAt === "/home".slice(0, 5) ||
-            currentlyAt === "/create".slice(0, 5) ||
-            currentlyAt === "/details/".slice(0, 5)
-        ) {
-            return true;
-        }
-        return false;
-    }
 
     return (
         <div className="navbar">
@@ -65,12 +55,7 @@ function Navbar() {
             >
                 Create
             </Link>
-            <div
-                className="unitSelector"
-                style={{
-                    display: shouldRenderUnits() ? "block" : "none",
-                }}
-            >
+            <div className="unitSelector">
                 <label>Units: </label>
                 <button
                     className="unitButton"
@@ -82,7 +67,7 @@ function Navbar() {
                     {units === "metric" ? "SI" : "US"}
                 </button>
             </div>
-            <button className="button-s" onClick={toggleFilters}>
+            <button className="button" onClick={toggleFilters}>
                 Filters
             </button>
         </div>

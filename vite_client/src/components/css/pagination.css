@@ -1,6 +1,6 @@
 .pagination {
     grid-area: pagination;
-    background-color: var(--background);
+    background-color: var(--secondary);
     position: fixed;
     bottom: 0;
     width: 100%;

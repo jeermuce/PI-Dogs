@@ -22,46 +22,41 @@ function Details() {
         life_span,
     } = dog;
 
-    /*      
-ID.
-Imagen.
-Nombre.
-Altura.
-Peso.
-Temperamentos.
-Años de vida.  */
     return (
         <section className="detailsPage">
             <div className="emptyDivNav"></div>
-            <div className="detailsBox">
+            <div className="main-with-sidebar">
                 <div className="detailsData">
-                    <p className="detailsId">
-                        ID: <>{id}</>
-                    </p>
-                    <h1 className="detailsName">Name: {name}</h1>
+                    <h1 className="detailsTitle">Details:</h1>
+                    <p className="detailsId">ID: {id}</p>
+                    <h1 className="detailsName">{name}</h1>
                     <p className="detailsWeight">
-                        Weight:{" "}
+                        <label htmlFor="detailsWeight">Weight: </label>
                         {units === "imperial"
                             ? `${weight_imperial} lbs`
                             : `${weight} kg`}
                     </p>
                     <p className="detailsHeight">
-                        Height:{" "}
+                        <label htmlFor="detailsHeight"> Height: </label>
                         {units === "imperial"
                             ? `${height_imperial} in`
                             : `${height} cm`}
                     </p>
 
                     <p className="detailsTemperaments">
-                        Temperaments:{" "}
+                        <label htmlFor="detailsTemperaments">
+                            Temperaments:
+                        </label>
                         {temperaments.map((t) => {
                             return t + ", ";
                         })}
                     </p>
-                    <p className="detailsLifeSpan">Life Span: {life_span}</p>
+                    <p className="detailsLifeSpan">
+                        <label htmlFor="detailsLifeSpan">Life Span: </label>
+                        {life_span}
+                    </p>
                 </div>
-
-                <div className="detailsImageBox">
+                <div className="imageContainer">
                     <img
                         src={image}
                         alt={name + " image"}

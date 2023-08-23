@@ -1,71 +1,60 @@
-.detailsPage {
+.main-with-sidebar {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
-    min-height: 100vh;
-    background-color: var(--background);
-}
-
-@media screen and (max-width: 768px) {
-    .detailsBox {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 80%;
-    }
-    .detailsData {
-        width: 100%;
-    }
-}
-.detailsBox {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background-color: var(--secondary);
+    gap: 1rem;
+    width: 80%;
+    max-width: 1200px;
+    margin-inline: auto;
+    margin-top: 2rem;
+    border-radius: 1rem;
     padding: 2rem;
-    border-radius: 0.6rem;
+    background-color: var(--primary);
+}
+/*  */
+
+.main-with-sidebar > :first-child {
+    flex-basis: 500px;
+    flex-grow: 9999;
+}
+.main-with-sidebar > :last-child {
+    flex-basis: 300;
+    flex-grow: 1;
+}
+.detailsTitle {
+    font-size: 1.7rem;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
 }
 .detailsData {
-    width: 20rem;
+    max-width: 30rem;
+}
+.detailsId {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    color: var(--text);
+    opacity: 0.3;
+}
+.detailsName {
+    margin-top: 0;
+    font-size: 1.5rem;
+    text-decoration: underline wavy;
 }
 .imageContainer {
+    width: 30%;
 }
+
 .dogImage {
-    width: var(--card_width);
+    width: 100%;
     aspect-ratio: 1;
     border-radius: 0.6rem;
     object-fit: cover;
     object-position: center;
 }
-/* <section className="detailsPage">
-            <div className="emptyDivNav"></div>
-            <div className="detailsBox">
-                <div className="detailsBox">
-                    <img
-                        src={image}
-                        alt={name + " image"}
-                        className="dogImage"
-                    />
-                    <h1 className="name">{name}</h1>
-                    <h2 className="temperaments">
-                        {temperaments.map((t) => t + ", ")}
-                    </h2>
-                    {units === "metric" ? (
-                        <h3 className="weight">{weight} kg</h3>
-                    ) : (
-                        <h3 className="weight">{weight_imperial} lbs</h3>
-                    )}
-                    {units === "metric" ? (
-                        <h3 className="height">{height} cm</h3>
-                    ) : (
-                        <h3 className="height">{height_imperial} in</h3>
-                    )}
-                    <h3 className="life_span">{life_span}</h3>
-                </div>
-            </div>
-        </section> */
