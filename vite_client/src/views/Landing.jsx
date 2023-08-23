@@ -6,13 +6,8 @@ import "./css/landing.css";
 import { AppContext } from "../App";
 
 function Landing() {
-    const { allDogs, setAllDogs, units, setUnits, baseURL, location } =
-        useContext(AppContext);
-    useEffect(() => {
-        axios.get(`${baseURL}dogs`).then(({ data }) => {
-            setAllDogs(data);
-        });
-    }, []);
+    const { setAllDogs, baseURL, setPage } = useContext(AppContext);
+
     return (
         <div className="landing">
             <Link to="/home">

@@ -1,0 +1,6 @@
+.filters {
+    position: fixed;
+    height: 2rem;
+    top: 2rem;
+    background-color: yellow;
+}

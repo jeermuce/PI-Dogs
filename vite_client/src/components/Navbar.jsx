@@ -1,16 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "./css/navbar.css";
 import { Link } from "react-router-dom";
-import { AppContext } from "../App";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
-
+import Filters from "./Filters";
+import { AppContext } from "../App";
 function Navbar() {
     const location = useLocation();
     const currentlyAt = location.pathname.slice(0, 5);
-    console.log(currentlyAt);
 
-    const { units, setUnits } = useContext(AppContext);
+    const {
+        allDogs,
+        setAllDogs,
+        units,
+        setUnits,
+        baseURL,
+        showFilters,
+        setShowFilters,
+        details,
+        setDetails,
+        temperaments,
+        setTemperaments,
+        page,
+        setPage,
+    } = useContext(AppContext);
+
+    const toggleFilters = () => {
+        setShowFilters(!showFilters);
+    };
+    function shouldRenderUnits() {
+        if (
+            currentlyAt === "/home".slice(0, 5) ||
+            currentlyAt === "/create".slice(0, 5) ||
+            currentlyAt === "/details/".slice(0, 5)
+        ) {
+            return true;
+        }
+        return false;
+    }
+
     return (
         <div className="navbar">
             <Link
@@ -30,14 +58,6 @@ function Navbar() {
                 Home
             </Link>
             <Link
-                to="/about"
-                style={{
-                    display: location.pathname === "/about" ? "none" : "block",
-                }}
-            >
-                About
-            </Link>
-            <Link
                 to="/create"
                 style={{
                     display: location.pathname === "/create" ? "none" : "block",
@@ -45,26 +65,26 @@ function Navbar() {
             >
                 Create
             </Link>
-            <div className="unitSelector">
+            <div
+                className="unitSelector"
+                style={{
+                    display: shouldRenderUnits() ? "block" : "none",
+                }}
+            >
                 <label>Units: </label>
                 <button
                     className="unitButton"
                     to="/home"
-                    style={{
-                        display:
-                            currentlyAt !== "/home".slice(0, 5) &&
-                            currentlyAt !== "/create".slice(0, 5) &&
-                            currentlyAt !== "/details/".slice(0, 5)
-                                ? "none"
-                                : "block",
-                    }}
                     onClick={() =>
                         setUnits(units === "metric" ? "imperial" : "metric")
                     }
                 >
-                    {units === "metric" ? "US" : "SI"}
+                    {units === "metric" ? "SI" : "US"}
                 </button>
             </div>
+            <button className="button-s" onClick={toggleFilters}>
+                Filters
+            </button>
         </div>
     );
 }

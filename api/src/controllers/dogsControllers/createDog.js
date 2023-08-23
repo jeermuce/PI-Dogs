@@ -14,6 +14,12 @@ async function createDog(dog, aDogHasBeenCreated) {
             image,
             temperaments,
         } = dog;
+        if (!name) {
+            aDogHasBeenCreated = true;
+            let code = 400; //400 Bad Request
+            let createdDog = "Name is required";
+            return { code, aDogHasBeenCreated, createdDog };
+        }
         let [createdDog, isNew] = await Dog.findOrCreate({
             where: {
                 name,
@@ -23,7 +29,7 @@ async function createDog(dog, aDogHasBeenCreated) {
                 weight_imperial,
                 height,
                 height_imperial,
-                life_span,
+                life_span: life_span + " years",
                 image,
             },
             include: {
@@ -33,7 +39,6 @@ async function createDog(dog, aDogHasBeenCreated) {
                 },
             },
         });
-
 
         if (!isNew) {
             aDogHasBeenCreated = false;
@@ -53,6 +58,17 @@ async function createDog(dog, aDogHasBeenCreated) {
                 through: {
                     attributes: [],
                 },
+            },
+            attributes: {
+                include: [
+                    name,
+                    height,
+                    height_imperial,
+                    weight,
+                    weight_imperial,
+                    life_span,
+                    image,
+                ],
             },
         });
 

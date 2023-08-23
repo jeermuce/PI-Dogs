@@ -1,43 +1,46 @@
 .card {
     height: 17rem;
     width: 10rem;
-
+    max-width: 20rem;
+    border-radius: 0.6rem;
+    border: solid 0.1rem var(--accent);
     display: flex;
     flex-flow: column nowrap;
     justify-content: start;
     align-items: center;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     font-size: small;
     margin: 1rem;
-    border: red solid;
 }
-.image {
+.cardImage {
     width: 7rem;
     margin: 0.7rem;
     aspect-ratio: 1;
     object-fit: cover;
+    object-position: top;
 }
-.name {
+.cardData {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 45%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+    border-radius: 0.6rem;
+    font-size: small;
+    margin: 0rem;
+    text-align: center;
+}
+.cardName {
     font-size: medium;
     font-weight: bold;
-    margin: 0rem;
+    margin: 0.2rem;
 }
-.temperaments {
+.cardTemperaments {
     font-size: small;
-    margin: 0rem;
+    margin: 0.2rem;
 }
-.weight {
+.cardWeight {
     font-size: small;
-    margin: 0rem;
+    margin: 0.2rem;
 }
-
-/*             <img src={dog.image} alt={dog.name} className="image" />
-            <h1 className="name">{dog.name}</h1>
-            <h2 className="temperaments">
-                {dog.temperaments.map((t) => t + ", ")}
-            </h2>
-            {units === "metric" ? (
-                <h3 className="weight">{dog.weight} kg</h3>
-            ) : (
-                <h3 className="weight">{dog.weight_imperial} lbs</h3>
-            )} */

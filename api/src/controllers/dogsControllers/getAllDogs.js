@@ -8,7 +8,13 @@ let dogCache = {};
 let apiCache = {};
 let isFirstRun = true;
 
-async function getAllDogs(orderBy, orderDirection, sort, aDogHasBeenCreated) {
+async function getAllDogs(
+    orderBy,
+    orderDirection,
+    sort,
+    aDogHasBeenCreated,
+    page
+) {
     try {
         let cacheKey = `${orderBy}-${orderDirection}`;
 
@@ -28,7 +34,9 @@ async function getAllDogs(orderBy, orderDirection, sort, aDogHasBeenCreated) {
             allDataFrom = "dogsCache";
             aDogHasBeenCreated = false;
             dogs = dogCache[cacheKey];
-            return { aDogHasBeenCreated, dogs };
+            const totalCount = dogs.length;
+            dogs = dogs.slice((page - 1) * 8, page * 8);
+            return { aDogHasBeenCreated, dogs, totalCount };
         } else if (apiCache[cacheKey]) {
             apiDataFrom = "apiCache";
             dogs = apiCache[cacheKey];
@@ -42,6 +50,15 @@ async function getAllDogs(orderBy, orderDirection, sort, aDogHasBeenCreated) {
 
         let dbDogs = await Dog.findAll({
             order: [[orderBy, orderDirection]],
+            attributes: [
+                "id",
+                "name",
+                "image",
+                "weight",
+                "weight_imperial",
+                "height",
+                "height_imperial",
+            ],
             include: {
                 model: Temperament,
                 attributes: ["name"],
@@ -63,8 +80,14 @@ async function getAllDogs(orderBy, orderDirection, sort, aDogHasBeenCreated) {
         isFirstRun = false;
         aDogHasBeenCreated = false;
         dogCache[cacheKey] = dogs;
+        dogs = dogs.slice((page - 1) * 8, page * 8);
+        const totalCount = Number(dogCache[cacheKey].length);
 
-        return { aDogHasBeenCreated, dogs };
+        return {
+            aDogHasBeenCreated,
+            dogs,
+            totalCount,
+        };
     } catch (error) {
         throw error;
     }

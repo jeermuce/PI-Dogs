@@ -4,7 +4,7 @@ const { axiosCaller } = require("../../utils/axiosCaller");
 const { Op } = require("sequelize");
 const { parseApiDogs } = require("../../utils/parseApiDogs");
 
-async function getDogByName(name) {
+async function getDogByName(name, page) {
     try {
         name = name.trim().toLowerCase();
         let dogs = await Dog.findAll({
@@ -34,6 +34,7 @@ async function getDogByName(name) {
 
         dogs = [...parsedDbDogs, ...apiDogs];
         dogs.sort();
+        dogs = dogs.slice(0, 8);
 
         return dogs;
     } catch (error) {

@@ -23,7 +23,7 @@ async function createHandler(req, res) {
         dog = await createDog(dog, aDogHasBeenCreated);
         aDogHasBeenCreated = dog.aDogHasBeenCreated;
         doggo = dog.createdDog;
-        res.status(dog.code).json(doggo);
+        res.status(dog.code).json(doggo || dog.message);
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
@@ -34,6 +34,7 @@ async function getAllHandler(req, res) {
         if (req.query.name) {
             return getByNameHandler(req, res);
         }
+        const page = req.query.page || 1;
         const newSort = req.query.newSort || false;
         const order = req.query.order || "name";
         const orderDirection = order.startsWith("-") ? "DESC" : "ASC";
@@ -42,20 +43,22 @@ async function getAllHandler(req, res) {
             orderBy,
             orderDirection,
             newSort,
-            aDogHasBeenCreated
+            aDogHasBeenCreated,
+            page
         );
         aDogHasBeenCreated = dogs.aDogHasBeenCreated;
         dogs = dogs.dogs;
+        const totalCount = dogs.totalCount;
 
-        return res.status(200).json(dogs);
+        return res.status(200).json({ dogs, totalCount });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
 }
 async function getByNameHandler(req, res) {
     try {
-        const name = req.query.name;
-        const dog = await getDogByName(name);
+        const { name, page } = req.query.name;
+        const dog = await getDogByName(name, page);
         res.status(200).json(dog);
     } catch (error) {
         res.status(400).send({ error: error.message });

@@ -21,17 +21,30 @@
     align-items: center;
 }
 button {
+    color: var(--text);
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    cursor: pointer;
+    transition: none;
+    height: 1.7rem;
+    min-width: fit-content;
+    transition: background-color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
     background-color: var(--primary);
+    /*     
     min-width: fit-content;
     max-width: 20%;
     transition: background-color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out;
     cursor: pointer;
-    border-radius: 0.6rem;
+    border-radius: 0.6rem; */
 }
 button:hover {
-    background-color: var(--primary-hover);
-    color: var(--text-hover);
+    background-color: var(--secondary);
+    color: var(--text);
+    scale: 1.1;
 }
 button:disabled {
     opacity: 0.5;
@@ -53,4 +66,5 @@ a:hover {
 .emptyDivNav {
     grid-area: nav;
     height: 2rem;
+    background-color: red;
 }

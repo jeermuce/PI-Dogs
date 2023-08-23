@@ -3,7 +3,6 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_DIAL } = process.env;
-console.log(DB_USER, "DB_PASS", DB_HOST, DB_NAME, DB_DIAL);
 
 const sequelize = new Sequelize(
     `${DB_DIAL}://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`,
