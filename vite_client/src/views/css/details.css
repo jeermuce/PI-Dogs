@@ -1,4 +1,4 @@
-.main-with-sidebar {
+.detailsContainer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -14,14 +14,21 @@
 }
 /*  */
 
-.main-with-sidebar > :first-child {
-    flex-basis: 500px;
+.detailsContainer > :first-child {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+    border-radius: 0.6rem;
+    flex-basis: 0;
+    height: fit-content;
     flex-grow: 9999;
 }
-.main-with-sidebar > :last-child {
+.detailsContainer > :last-child {
     flex-basis: 300;
+    height: 14rem;
+    overflow-y: scroll;
     flex-grow: 1;
 }
+
 .detailsTitle {
     font-size: 1.7rem;
     margin: 0;

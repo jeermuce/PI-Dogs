@@ -17,6 +17,7 @@ function App() {
     const baseURL = "http://localhost:3001/";
     const location = useLocation();
     const [allDogs, setAllDogs] = useState([]);
+    const [createdDog, setCreatedDog] = useState({});
     const [units, setUnits] = useState("metric");
     const [showFilters, setShowFilters] = useState(false);
     const [details, setDetails] = useState({});
@@ -28,7 +29,7 @@ function App() {
         axios.get(`${baseURL}dogs?page=${page}`).then(({ data }) => {
             setAllDogs(data.dogs);
         });
-    }, [page]);
+    }, [page, createdDog]);
 
     useEffect(() => {
         getTemperaments();
@@ -37,7 +38,7 @@ function App() {
                 setTemperaments(data.map((t) => t.name));
             });
         }
-    }, []);
+    }, [createdDog]);
     return (
         <AppContext.Provider
             value={{
@@ -55,6 +56,8 @@ function App() {
                 setTemperaments,
                 page,
                 setPage,
+                createdDog,
+                setCreatedDog,
             }}
         >
             <section className="App">

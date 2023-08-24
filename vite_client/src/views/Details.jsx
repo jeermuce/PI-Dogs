@@ -25,7 +25,7 @@ function Details() {
     return (
         <section className="detailsPage">
             <div className="emptyDivNav"></div>
-            <div className="main-with-sidebar">
+            <div className="detailsContainer">
                 <div className="detailsData">
                     <h1 className="detailsTitle">Details:</h1>
                     <p className="detailsId">ID: {id}</p>
@@ -56,13 +56,7 @@ function Details() {
                         {life_span}
                     </p>
                 </div>
-                <div className="imageContainer">
-                    <img
-                        src={image}
-                        alt={name + " image"}
-                        className="dogImage"
-                    />
-                </div>
+                <img src={image} alt={name + " image"} className="dogImage" />
             </div>
         </section>
     );

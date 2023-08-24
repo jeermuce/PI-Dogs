@@ -1,5 +1,4 @@
 .card {
-    height: 17rem;
     border-radius: 0.6rem;
     border: solid 0.1rem var(--accent);
     display: flex;
@@ -7,7 +6,8 @@
     justify-content: start;
     align-items: center;
     background-color: var(--primary);
-    height: 100%;
+
+    aspect-ratio: 1/1.6;
     /*
     width: 10rem;
     max-width: 20rem;
