@@ -1,34 +1,54 @@
-.main-with-sidebar {
+.form-contents {
     --input-bar-width: 50%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0rem;
     width: 80%;
     max-width: 1200px;
     margin-inline: auto;
     margin-top: 2rem;
     border-radius: 1rem;
     padding: 2rem;
-    background-color: var(--primary);
+   
+    background-image: var(--background-image);
 }
-.main-with-sidebar > :first-child {
+.form-contents > :first-child {
     background-color: var(--background-dark);
     color: var(--text-dark);
-    border-radius: 0.6rem;
     flex-basis: 0;
     height: 14rem;
     flex-basis: 500px;
     flex-grow: 9999;
 }
-.main-with-sidebar > :last-child {
+.form-contents > :last-child {
     flex-basis: 300;
     height: 14rem;
     overflow-y: scroll;
     flex-grow: 1;
+    background-color: var(--background);
 }
-/*  */
+/* at max 865 screen width, first-child has rounded top corners, but not rounded bottom corners */
+/* at max 865 screen width, last-child has rounded bottom corners, but not rounded top corners */
+/* at min 866 screen width, first-child has rounded left corners, but not rounded right corners */
+/* at min 866 screen width, last-child has rounded right corners, but not rounded left corners */
+@media (max-width: 865px) {
+    .firstChild {
+        border-radius: 0.6rem 0.6rem 0rem 0rem;
+    }
+    .temperaments-menu {
+        border-radius: 0rem 0rem 0.6rem 0.6rem;
+    }
+}
+@media (min-width: 866px) {
+    .firstChild {
+        border-radius: 0.6rem 0rem 0rem 0.6rem;
+    }
+    .temperaments-menu {
+        border-radius: 0rem 0.6rem 0.6rem 0rem;
+    }
+}
 .create-title {
     background-color: var(--background);
     margin: 0;
@@ -46,9 +66,6 @@
     padding: 2rem;
 }
 
-.temperaments-menu {
-}
-
 .single-input {
     display: flex;
     flex-flow: row nowrap;
@@ -59,7 +76,6 @@
 .double-input {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: ;
     align-items: center;
     position: relative;
 }
@@ -85,7 +101,8 @@
 }
 .label-attribute-temperament {
     width: fit-content;
-    min-width: 9rem;
+    width: -moz-fit-content;
+    min-width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

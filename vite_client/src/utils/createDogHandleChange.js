@@ -30,7 +30,7 @@ function createDogHandleChange(
 
                       return updatedState;
                   });
-            type === "text" && //temperaments text is a comma separated string, convert to array
+            type === "text" &&
                 setForm((prevState) => {
                     let checkboxes = document.querySelectorAll(
                         "input[type=checkbox]"
@@ -42,7 +42,6 @@ function createDogHandleChange(
                     updatedState.temperaments = value
                         .split(",")
                         .map((t) => t.trim().capitalize());
-                    //remove "" from array
                     updatedState.temperaments =
                         updatedState.temperaments.filter((t) => t !== "");
 

@@ -3,7 +3,7 @@ import React from "react";
 function About() {
     return (
         <div>
-            <div className="emptyDivNav"></div>
+            <div className="empty-div-nav-spacer"></div>
             <div>About</div>
         </div>
     );

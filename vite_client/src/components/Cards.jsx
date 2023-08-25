@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Card from "./Card";
 import "./css/cards.css";
 import { AppContext } from "../App";
+import wood from "../assets/wood.png";
 function Cards() {
     const { allDogs, units, showFilters } = useContext(AppContext);
 

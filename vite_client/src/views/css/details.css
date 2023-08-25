@@ -1,67 +1,45 @@
-.detailsContainer {
+.details-container {
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
     gap: 1rem;
-    width: 80%;
-    max-width: 1200px;
-    margin-inline: auto;
-    margin-top: 2rem;
-    border-radius: 1rem;
-    padding: 2rem;
-    background-color: var(--primary);
-}
-/*  */
+    max-width: 40rem;
 
-.detailsContainer > :first-child {
-    background-color: var(--background-dark);
-    color: var(--text-dark);
+    margin-inline: auto;
+    background-image: var(--background-image);
+}
+.details-title-h1 {
+    background-image: var(--background);
+    margin: 0;
+    width: 16rem;
+    text-align: center;
+    font-size: 1.5rem;
+    top: 2rem;
+    left: calc((100% - 16rem) / 2);
+    position: relative;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.details-data-container /* first child */ {
+    flex-basis: 20rem;
+    background-color: rgba(var(--secondary-decimal-rgb), 0.8);
     border-radius: 0.6rem;
-    flex-basis: 0;
-    height: fit-content;
     flex-grow: 9999;
 }
-.detailsContainer > :last-child {
-    flex-basis: 300;
-    height: 14rem;
-    overflow-y: scroll;
+.details-dog-image-container /* second child */ {
+    flex-basis: 15rem;
     flex-grow: 1;
 }
-
-.detailsTitle {
-    font-size: 1.7rem;
-    margin: 0;
-    padding: 0;
-    width: fit-content;
-}
-.detailsData {
-    max-width: 30rem;
-}
-.detailsId {
-    display: flex;
-    align-items: center;
-    flex-flow: row;
-    font-size: 1.2rem;
-    margin: 0;
-    padding: 0;
-    width: fit-content;
-    color: var(--text);
-    opacity: 0.3;
-}
-.detailsName {
-    margin-top: 0;
-    font-size: 1.5rem;
-    text-decoration: underline wavy;
-}
-.imageContainer {
-    width: 30%;
-}
-
-.dogImage {
+.details-dog-image {
     width: 100%;
     aspect-ratio: 1;
-    border-radius: 0.6rem;
     object-fit: cover;
-    object-position: center;
+    object-position: top;
+}
+.details-id-p {
+    opacity: 0.3;
+    font-size: 0.6rem;
 }

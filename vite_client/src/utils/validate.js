@@ -72,7 +72,6 @@ function validate(input, name, errors, setErrors) {
         case "weight_high":
         case "life_span_low":
         case "life_span_high":
-            console.log(name);
             if (input === "") {
                 errorMessage = errorMessages[name].empty;
             } else if (isNaN(input)) {

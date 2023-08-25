@@ -22,6 +22,7 @@ function App() {
     const [showFilters, setShowFilters] = useState(false);
     const [details, setDetails] = useState({});
 
+    const [clear, setClear] = useState(false);
     const [temperaments, setTemperaments] = useState([]);
     const [page, setPage] = useState(1);
 
@@ -47,7 +48,6 @@ function App() {
                 units,
                 setUnits,
                 baseURL,
-                location,
                 showFilters,
                 setShowFilters,
                 details,
@@ -58,6 +58,8 @@ function App() {
                 setPage,
                 createdDog,
                 setCreatedDog,
+                clear,
+                setClear,
             }}
         >
             <section className="App">

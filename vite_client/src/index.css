@@ -1,39 +1,64 @@
 :root {
+    --background-image: url("G:/PI/40b/mine/PI-Dogs-main/vite_client/src/assets/wood.png");
     /************* Light Palette *************/
-    --text-light: #060405;
-    --text-light-hover: #f0ebec;
 
-    --background-light: #fff;
+    --text-light: #0f0704;
+    --text-light-hover: var(--text-dark);
+    --text-light-decimal-rgb: 15, 7, 4;
 
-    --secondary-light: #e4587d;
-    --secondary-light-hover: #bb3a5d;
+    --background-light: #e8c3b5;
+    --background-light-hover: var(--background-dark);
+    --background-light-decimal-rgb: 232, 195, 181;
 
-    --primary-light: #836a8f;
-    --primary-light-hover: #562564;
+    --secondary-light: #f1fcee;
+    --secondary-light-hover: var(--secondary-dark);
+    --secondary-light-decimal-rgb: 241, 252, 238;
 
-    --accent-light: #194f55;
+    --primary-light: #a0a900;
+    --primary-light-hover: var(--primary-dark);
+    --primary-light-decimal-rgb: 160, 169, 0;
+
+    --accent-light: #5a2703;
+    --accent-light-hover: var(--accent-dark);
+    --accent-light-decimal-rgb: 90, 39, 3;
+
     /************* Dark Palette *************/
-    --text-dark: #f0ebec;
-    --text-dark-hover: #060405;
+    --text-dark: #ffffff;
+    --text-dark-hover: var(--text-light);
+    --text-dark-decimal-rgb: 255, 255, 255;
 
-    --background-dark: #060405;
+    --background-dark: #0f0704;
+    --background-dark-hover: var(--background-light);
+    --background-dark-decimal-rgb: 15, 7, 4;
 
-    --secondary-dark: #bb3a5d;
-    --secondary-dark-hover: #e4587d;
+    --secondary-dark: #19460c;
+    --secondary-dark-hover: var(--secondary-light);
+    --secondary-dark-decimal-rgb: 25, 70, 12;
 
-    --primary-dark: #562564;
-    --primary-dark-hover: #c4adcf;
+    --primary-dark: #92990c;
+    --primary-dark-hover: var(--primary-light);
+    --primary-dark-decimal-rgb: 146, 153, 12;
 
-    --accent-dark: #00e5ff;
+    --accent-dark: #ee6808;
+    --accent-dark-hover: var(--accent-light);
+    --accent-dark-decimal-rgb: 238, 104, 8;
+
     /* ************* Common ************* */
     --background: var(--background-dark);
+    --background-hover: var(--background-dark-hover);
+    --background-decimal-rgb: var(--background-dark-decimal-rgb);
     --text: var(--text-dark);
     --text-hover: var(--text-dark-hover);
+    --text-decimal-rgb: var(--text-dark-decimal-rgb);
     --secondary: var(--secondary-dark);
     --secondary-hover: var(--secondary-dark-hover);
+    --secondary-decimal-rgb: var(--secondary-dark-decimal-rgb);
     --primary: var(--primary-dark);
     --primary-hover: var(--primary-dark-hover);
+    --primary-decimal-rgb: var(--primary-dark-decimal-rgb);
     --accent: var(--accent-dark);
+    --accent-hover: var(--accent-dark-hover);
+    --accent-decimal-rgb: var(--accent-dark-decimal-rgb);
 
     color-scheme: light dark;
     color: var(--text);
@@ -43,7 +68,8 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%; /* For WebKit browsers */
+    text-size-adjust: 100%; /* For other modern browsers */
 }
 body {
     margin: 0;
@@ -60,12 +86,19 @@ body {
 @media (prefers-color-scheme: light) {
     :root {
         --background: var(--background-light);
+        --background-hover: var(--background-light-hover);
+        --background-decimal-rgb: var(--background-light-decimal-rgb);
         --text: var(--text-light);
         --text-hover: var(--text-light-hover);
+        --text-decimal-rgb: var(--text-light-decimal-rgb);
         --secondary: var(--secondary-light);
         --secondary-hover: var(--secondary-light-hover);
+        --secondary-decimal-rgb: var(--secondary-light-decimal-rgb);
         --primary: var(--primary-light);
         --primary-hover: var(--primary-light-hover);
+        --primary-decimal-rgb: var(--primary-light-decimal-rgb);
         --accent: var(--accent-light);
+        --accent-hover: var(--accent-light-hover);
+        --accent-decimal-rgb: var(--accent-light-decimal-rgb);
     }
 }

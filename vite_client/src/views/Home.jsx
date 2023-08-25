@@ -12,7 +12,6 @@ function Home() {
         units,
         setUnits,
         baseURL,
-        location,
         showFilters,
         setShowFilters,
         details,
@@ -21,24 +20,30 @@ function Home() {
         setTemperaments,
         page,
         setPage,
+        createdDog,
+        setCreatedDog,
+        clear,
+        setClear,
     } = useContext(AppContext);
+    let currentDogs = allDogs;
+    useEffect(() => {
+        axios.get(`${baseURL}dogs?page=${page}`).then(({ data }) => {
+            setAllDogs(data.dogs);
+        });
+        setClear(false);
+    }, [page, createdDog, clear]);
 
     return (
         <div className="homePage">
-            <div className="emptyDivNav"></div>
-            {/* check if alldogs[1].name exists, render Cards and Pagination if it does, renedrn loading... if it doesnt */}
-            {allDogs[1] ? (
+            <div className="empty-div-nav-spacer"></div>
+            {currentDogs[1] ? (
                 <>
-                    <Cards allDogs={allDogs} units={units} />
+                    <Cards allDogs={currentDogs} units={units} />
                     <Pagination />
                 </>
             ) : (
                 <div className="loading">Loading...</div>
             )}
-
-            {/* 
-            <Cards allDogs={allDogs} units={units} /> */}
-            <Pagination />
         </div>
     );
 }

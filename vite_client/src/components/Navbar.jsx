@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./css/navbar.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Filters from "./Filters";
+import Searchbar from "./Searchbar";
 import { AppContext } from "../App";
+import paw from "../assets/paw.png";
 function Navbar() {
     const location = useLocation();
     const currentlyAt = location.pathname.slice(0, 5);
@@ -31,30 +33,41 @@ function Navbar() {
 
     return (
         <div className="navbar">
-            <Link
+            <NavLink
                 to="/"
                 style={{
                     display: location.pathname === "/" ? "none" : "block",
+                    height: "100%",
                 }}
             >
-                Landing
-            </Link>
-            <Link
+                <img src={paw} alt="paw-logo" className="paw-logo-navbar" />
+            </NavLink>
+            <NavLink
                 to="/home"
                 style={{
                     display: location.pathname === "/home" ? "none" : "block",
                 }}
             >
                 Home
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
                 to="/create"
                 style={{
                     display: location.pathname === "/create" ? "none" : "block",
                 }}
             >
                 Create
-            </Link>
+            </NavLink>
+            <Searchbar />
+
+            {currentlyAt !== "/deta" && (
+                <button
+                    className="filter-button-navbar"
+                    onClick={toggleFilters}
+                >
+                    Filters
+                </button>
+            )}
             <div className="unitSelector">
                 <label>Units: </label>
                 <button
@@ -67,9 +80,6 @@ function Navbar() {
                     {units === "metric" ? "SI" : "US"}
                 </button>
             </div>
-            <button className="button" onClick={toggleFilters}>
-                Filters
-            </button>
         </div>
     );
 }

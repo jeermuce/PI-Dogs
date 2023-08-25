@@ -57,7 +57,7 @@ async function getAllHandler(req, res) {
 }
 async function getByNameHandler(req, res) {
     try {
-        const { name, page } = req.query.name;
+        const { name, page } = req.query;
         const dog = await getDogByName(name, page);
         res.status(200).json(dog);
     } catch (error) {

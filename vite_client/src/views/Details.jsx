@@ -10,7 +10,21 @@ function Details() {
         useContext(AppContext);
 
     const { id } = useParams();
-    const dog = allDogs.find((dog) => dog.id == id);
+    let dog = allDogs.find((dog) => dog.id == id);
+
+    if (dog) {
+        dog = dog;
+    } else
+        dog = {
+            name: "Loading...",
+            image: "https://i.pinimg.com/originals/0f/6e/1e/0f6e1e1b6b0b0b0b0b0b0b0b0b0b0b0b.gif",
+            temperaments: ["Loading..."],
+            weight: "Loading...",
+            weight_imperial: "Loading...",
+            height: "Loading...",
+            height_imperial: "Loading...",
+            life_span: "Loading...",
+        };
     const {
         name,
         image,
@@ -21,42 +35,57 @@ function Details() {
         height_imperial,
         life_span,
     } = dog;
-
     return (
-        <section className="detailsPage">
-            <div className="emptyDivNav"></div>
-            <div className="detailsContainer">
-                <div className="detailsData">
-                    <h1 className="detailsTitle">Details:</h1>
-                    <p className="detailsId">ID: {id}</p>
-                    <h1 className="detailsName">{name}</h1>
-                    <p className="detailsWeight">
+        <section className="details-page">
+            <h1 className="details-title-h1">Details:</h1>
+
+            {/* parent */}
+            <div className="details-container">
+                {/* firstChild */}
+                <div className="details-data-container">
+                    <p className="details-id-p">ID: {id}</p>
+                    <h1 className="details-name-h1">{name}</h1>
+                    <p
+                        className="
+                        details-weight-p
+                    "
+                    >
                         <label htmlFor="detailsWeight">Weight: </label>
                         {units === "imperial"
                             ? `${weight_imperial} lbs`
                             : `${weight} kg`}
                     </p>
-                    <p className="detailsHeight">
+                    <p className="details-height-p">
                         <label htmlFor="detailsHeight"> Height: </label>
                         {units === "imperial"
                             ? `${height_imperial} in`
                             : `${height} cm`}
                     </p>
 
-                    <p className="detailsTemperaments">
+                    <p className="details-id-temperaments">
                         <label htmlFor="detailsTemperaments">
-                            Temperaments:
+                            Temperaments:{" "}
                         </label>
-                        {temperaments.map((t) => {
-                            return t + ", ";
-                        })}
+                        {temperaments
+                            .map((t) => {
+                                return t + ", ";
+                            })
+                            .join("")
+                            .slice(0, -2)}
                     </p>
-                    <p className="detailsLifeSpan">
+                    <p className="details-lifespan-p">
                         <label htmlFor="detailsLifeSpan">Life Span: </label>
                         {life_span}
                     </p>
                 </div>
-                <img src={image} alt={name + " image"} className="dogImage" />
+                {/* last child */}
+                <div className="details-dog-image-container">
+                    <img
+                        src={image}
+                        alt={name + " image"}
+                        className="details-dog-image"
+                    />
+                </div>
             </div>
         </section>
     );

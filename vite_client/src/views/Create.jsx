@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
-import axios from "axios";
 import "./css/create.css";
 import submitDog from "../utils/submitDog";
 import createDogHandleChange from "../utils/createDogHandleChange";
@@ -27,7 +26,6 @@ function Create() {
         units,
         setUnits,
         baseURL,
-        location,
         showFilters,
         setShowFilters,
         details,
@@ -39,10 +37,10 @@ function Create() {
         createdDog,
         setCreatedDog,
     } = useContext(AppContext);
-    const [inputTemperaments, setInputTemperaments] = React.useState([]);
-    const [textTemperaments, setTextTemperaments] = React.useState([]);
+    //deal with dogExists
     const [checkboxTemperaments, setCheckboxTemperaments] = React.useState([]);
-    const [errors, setErrors] = React.useState({
+
+    const [errors, setErrors] = useState({
         name: null,
         image: null,
         height_low: null,
@@ -53,7 +51,7 @@ function Create() {
         life_span_high: null,
         temperaments: null,
     });
-    const [form, setForm] = React.useState({
+    const [form, setForm] = useState({
         name: "",
         image: "",
         height_low: "",
@@ -75,70 +73,55 @@ function Create() {
             return updatedState;
         });
     }, [units]);
+
     useEffect(() => {
-        console.log("form", form);
-        console.log("errors", errors);
-    }, [form, errors]);
-
-    /*     function handleChange(event) {
-        let { name, value, type, checked } = event.target;
-        switch (name) {
-            case "temperaments":
-                type === "checkbox" && checked
-                    ? setForm((prevState) => {
-                          let updatedState = { ...prevState };
-                          updatedState.temperaments.push(value);
-                          updatedState.temperaments = [
-                              ...new Set(updatedState.temperaments),
-                          ];
-                          return updatedState;
-                      })
-                    : setForm((prevState) => {
-                          let updatedState = { ...prevState };
-                          updatedState.temperaments =
-                              updatedState.temperaments.filter(
-                                  (t) => t !== value
-                              );
-                          updatedState.temperaments = [
-                              ...new Set(updatedState.temperaments),
-                          ];
-
-                          return updatedState;
-                      });
-                type === "text" && //temperaments text is a comma separated string, convert to array
-                    setForm((prevState) => {
-                        let checkboxes = document.querySelectorAll(
-                            "input[type=checkbox]"
-                        );
-                        checkboxes.forEach((checkbox) => {
-                            checkbox.checked = false;
-                        });
-                        let updatedState = { ...prevState };
-                        updatedState.temperaments = value
-                            .split(",")
-                            .map((t) => t.trim().capitalize());
-                        //remove "" from array
-                        updatedState.temperaments =
-                            updatedState.temperaments.filter((t) => t !== "");
-
-                        updatedState.temperaments = [
-                            ...new Set(updatedState.temperaments),
-                        ];
-                        setCheckboxTemperaments(updatedState.temperaments);
-                        return updatedState;
-                    });
-                break;
-            default:
-                setForm((prevState) => {
-                    let updatedState = { ...prevState };
-                    updatedState[name] = value.capitalize();
-
-                    return updatedState;
-                });
-                break;
+        let dogExists = false;
+        if (
+            form.name === "" ||
+            form.name === " " ||
+            form.name === null ||
+            form.name === undefined
+        ) {
+            return;
         }
-        validate(value, name, errors, setErrors);
-    } */
+        allDogs.forEach((dog) => {
+            if (dog.name.toLowerCase() === form.name.toLowerCase()) {
+                dogExists = true;
+            }
+        });
+        setErrors((prevState) => {
+            let updatedState = { ...prevState };
+            updatedState.name = dogExists ? "Dog already exists" : "";
+            return updatedState;
+        });
+    }, [form]);
+    useEffect(() => {
+        setForm({
+            name: "",
+            image: "",
+            height_low: "",
+            height_high: "",
+            height_unit: `${units}`,
+            weight_low: "",
+            weight_high: "",
+            weight_unit: `${units}`,
+            life_span_low: "",
+            life_span_high: "",
+            temperaments: [],
+        });
+        setErrors({
+            name: null,
+            image: null,
+            height_low: null,
+            height_high: null,
+            weight_low: null,
+            weight_high: null,
+            life_span_low: null,
+            life_span_high: null,
+            temperaments: null,
+        });
+    }, [createdDog]);
+    /*  */
 
     function disableSubmit() {
         for (let error in errors) {
@@ -154,8 +137,8 @@ function Create() {
             <div className="container">
                 <h1 className="create-title">Create a dog</h1>
                 <form
-                    onSubmit={(event) =>
-                        submitDog(
+                    onSubmit={(event) => {
+                        return submitDog(
                             event,
                             form,
                             setForm,
@@ -163,8 +146,8 @@ function Create() {
                             setCreatedDog,
                             units,
                             baseURL
-                        )
-                    }
+                        );
+                    }}
                     onChange={(event) =>
                         createDogHandleChange(
                             event,
@@ -175,7 +158,7 @@ function Create() {
                             errors
                         )
                     }
-                    className="main-with-sidebar"
+                    className="form-contents"
                 >
                     {firstChild()}
 
@@ -188,15 +171,15 @@ function Create() {
     function lastChild() {
         return (
             <div className="temperaments-menu">
-                {temperaments.map((temperament) => (
+                {temperaments.map((temperament, index) => (
                     <div
                         className="checkbox"
-                        key={temperament}
+                        key={index}
                         style={{
                             backgroundColor: form.temperaments.includes(
                                 temperament
                             )
-                                ? "var(--primary)"
+                                ? "var(--accent)"
                                 : "var(--background)",
                         }}
                     >
@@ -209,8 +192,7 @@ function Create() {
                             value={temperament}
                         />
                         <label
-                            /* if the thing is checked, make the background --primary */
-
+                            key={index}
                             className="label-attribute-temperament"
                             htmlFor={temperament}
                         >

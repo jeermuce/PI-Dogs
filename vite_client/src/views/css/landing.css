@@ -1,5 +1,4 @@
 .landing {
-    /* background-image: url("https://wallpapercave.com/wp/n6aIVaz.jpg"); */
     background-image: url("https://c2.staticflickr.com/4/3616/5787887576_d065773d1d_b.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -16,6 +15,7 @@
     border-radius: 0.5rem;
     height: fit-content;
     width: fit-content;
+    width: -moz-fit-content;
     padding: 1rem;
     font-size: xx-large;
     font-weight: bold;
