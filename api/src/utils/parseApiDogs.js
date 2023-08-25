@@ -24,9 +24,9 @@ function parseTemperaments(temperaments) {
 function parseApiDog(apiDog, client) {
     try {
         let image;
-        if (client === "dogs" || client === "dogsByName") {
+        if (client === "dogs") {
             image = apiDog.image.url;
-        } else if (client === "dogById") {
+        } else if (client === "dogById" || client === "dogsByName") {
             image = `https://cdn2.thedogapi.com/images/${apiDog.reference_image_id}.jpg`;
         }
         return {
