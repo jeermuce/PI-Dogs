@@ -2,10 +2,10 @@ const { Temperament } = require("../db");
 
 async function getTemperamentsFromDb() {
     const temperaments = await Temperament.findAll({
-        attributes: ["name", "id"],
+        attributes: ["name", "id", "source"],
         order: [["name", "ASC"]],
     });
-    const orderedTemperaments = temperaments.map((temperament) => temperament);
+    const orderedTemperaments = temperaments;
     return {
         temperaments: orderedTemperaments,
         message: `${temperaments.length} temperaments found in database`,

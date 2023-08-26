@@ -36,7 +36,7 @@ function App() {
         getTemperaments();
         async function getTemperaments() {
             await axios.get(`${baseURL}temperaments`).then(({ data }) => {
-                setTemperaments(data.map((t) => t.name));
+                setTemperaments(data.temperaments.map((t) => t.name));
             });
         }
     }, [createdDog]);

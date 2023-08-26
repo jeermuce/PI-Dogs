@@ -48,6 +48,11 @@ module.exports = (sequelize) => {
                 allowNull: false,
                 defaultValue: "unknown",
             },
+            source: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: "database",
+            }
         },
         {
             timestamps: false,

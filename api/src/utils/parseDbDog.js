@@ -12,6 +12,7 @@ function parseDbDog(dog) {
         life_span: dog.life_span,
         image: dog.image,
         temperaments: parsedTemperaments,
+        source: dog.source,
     };
 }
 module.exports = { parseDbDog };

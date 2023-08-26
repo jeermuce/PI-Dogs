@@ -4,7 +4,7 @@ const { axiosCaller } = require("../../utils/axiosCaller");
 const { Op } = require("sequelize");
 const { parseApiDogs } = require("../../utils/parseApiDogs");
 
-async function getDogByName(name, page) {
+async function getDogByName(name) {
     try {
         console.log(name);
         name = name.trim().toLowerCase();
@@ -29,14 +29,16 @@ async function getDogByName(name, page) {
 
         const response = await axiosCaller("name", name);
 
-        apiDogs = await parseApiDogs(response.data, "dogsByName");
-        !parsedDbDogs.length && (parsedDbDogs = ["No matches in DB"]);
+        apiDogs = parseApiDogs(response.data, "dogsByName");
+        const totalCount = apiDogs.length + parsedDbDogs.length;
+        !parsedDbDogs.length && (parsedDbDogs = ["No matches in database"]);
         !apiDogs.length && (apiDogs = ["No matches in API"]);
 
-        dogs = [...parsedDbDogs, ...apiDogs];
         dogs.sort();
-        dogs = dogs.slice(0, 8);
 
+        const totalDogs = [...parsedDbDogs, ...apiDogs];
+
+        dogs = { dogs: totalDogs, totalCount };
         return dogs;
     } catch (error) {
         throw error;

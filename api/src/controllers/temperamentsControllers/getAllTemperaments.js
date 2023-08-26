@@ -29,13 +29,18 @@ async function getAllTemperaments() {
         let uniqueTemperaments = Array.from(new Set(allTemperaments));
 
         await Temperament.bulkCreate(
-            uniqueTemperaments.map((temperament) => ({ name: temperament })),
+            uniqueTemperaments.map((temperament) => ({
+                name: temperament,
+                source: "api",
+            })),
             { updateOnDuplicate: ["name"] }
         );
+        const dbTemperaments = (await getTemperamentsFromDb()).temperaments;
+
         isFirstRun = false;
         return {
-            temperaments: uniqueTemperaments,
-            message: `${uniqueTemperaments.length} temperaments saved to database`,
+            temperaments: dbTemperaments,
+            totalCount: dbTemperaments.length,
         };
     } catch (error) {
         throw error;

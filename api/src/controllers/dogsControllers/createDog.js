@@ -31,6 +31,7 @@ async function createDog(dog, aDogHasBeenCreated) {
                 height_imperial,
                 life_span: life_span + " years",
                 image,
+                source: "database",
             },
             include: {
                 model: Temperament,
@@ -41,7 +42,7 @@ async function createDog(dog, aDogHasBeenCreated) {
         });
 
         if (!isNew) {
-            aDogHasBeenCreated = false;
+            aDogHasBeenCreated = true;
             const code = 409; //409 Conflict
             createdDog = parseDbDog(createdDog.dataValues);
             return { code, aDogHasBeenCreated, createdDog };
@@ -60,11 +61,12 @@ async function createDog(dog, aDogHasBeenCreated) {
                 },
             },
         });
-
         createdDog = parseDbDog(createdDog.dataValues);
+        console.log("createdDog", createdDog);
 
         aDogHasBeenCreated = true;
         const code = 201; //201 Created
+        console.log("code", code);
         return { code, aDogHasBeenCreated, createdDog };
     } catch (error) {
         throw error;

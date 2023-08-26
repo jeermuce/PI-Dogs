@@ -11,6 +11,7 @@ async function dogBodyParser(dog) {
         life_span_high, //number
         image, //url
         temperaments, //array of strings
+        source, //string
     } = dog;
 
     const [weight, weight_imperial] = rangeConverter(
@@ -35,6 +36,7 @@ async function dogBodyParser(dog) {
         life_span,
         image,
         temperaments,
+        source,
     };
     return parsedDog;
 }

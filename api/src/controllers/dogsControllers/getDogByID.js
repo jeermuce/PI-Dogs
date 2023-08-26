@@ -19,7 +19,7 @@ async function getDogById(id) {
             return dog;
         }
         const response = await axiosCaller("id", id);
-        //if the response is an empty object, it means the id is not in the API
+        
         if (Object.keys(response.data).length === 0) {
             throw new Error(`Dog with id ${id} not found`);
         }

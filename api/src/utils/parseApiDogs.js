@@ -39,6 +39,7 @@ function parseApiDog(apiDog, client) {
             life_span: apiDog.life_span,
             image,
             temperaments: parseTemperaments(apiDog.temperament),
+            source: "api",
         };
     } catch (error) {
         throw error;

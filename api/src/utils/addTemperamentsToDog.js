@@ -5,10 +5,15 @@ async function addTemperamentsToDog(dog, temperaments) {
         try {
             const createdTemperaments = await Promise.all(
                 temperaments.map(async (temperament) => {
+                    console.log("temperament", temperament);
                     const [createdTemperament] = await Temperament.findOrCreate(
                         {
                             where: {
                                 name: temperament,
+                            },
+                            defaults: {
+                                name: temperament,
+                                source: "database",
                             },
                         }
                     );

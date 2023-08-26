@@ -23,12 +23,13 @@ function submitDog(
         life_span_high: form.life_span_high,
         temperaments: form.temperaments,
     };
-
+    console.log(newDog);
     axios.post(`${baseURL}dogs`, newDog).then(({ data }) => {
         setCreatedDog(data);
     });
 
     let checkboxes = document.querySelectorAll("input[type=checkbox]");
+    document.querySelector("form").reset();
     checkboxes.forEach((checkbox) => {
         checkbox.checked = false;
     });
