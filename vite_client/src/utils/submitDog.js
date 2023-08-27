@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function submitDog(
     event,
     form,
@@ -24,7 +25,7 @@ function submitDog(
         temperaments: form.temperaments,
     };
     console.log(newDog);
-    axios.post(`${baseURL}dogs`, newDog).then(({ data }) => {
+    const dog = axios.post(`${baseURL}dogs`, newDog).then(({ data }) => {
         setCreatedDog(data);
     });
 
@@ -34,7 +35,7 @@ function submitDog(
         checkbox.checked = false;
     });
 
-    return;
+    return dog;
 }
 
 export default submitDog;

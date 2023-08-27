@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="199.99968mm"
+   height="199.99968mm"
+   viewBox="0 0 199.99968 199.99968"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="❌.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.17228536"
+     inkscape:cx="2.9021619"
+     inkscape:cy="290.21619"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-50.446606,-92.150605)">
+    <text
+       xml:space="preserve"
+       style="font-size:3.6px;line-height:1.25;font-family:'Cascadia Mono';-inkscape-font-specification:'Cascadia Mono';stroke-width:0.264583"
+       x="53.753197"
+       y="96.104202"
+       id="text790"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="53.753197"
+         y="96.104202"
+         id="tspan792" /></text>
+    <g
+       aria-label="❌"
+       id="text2408"
+       style="font-size:228.062px;line-height:1.25;font-family:'Cascadia Mono';-inkscape-font-specification:'Cascadia Mono';stroke-width:16.7615">
+      <path
+         d="m 250.44629,116.09266 -75.94643,76.05779 75.94643,76.05778 -23.94206,23.94206 L 150.44645,216.20386 74.388661,292.15029 50.446606,268.20823 126.39303,192.15045 50.446606,116.09266 74.388661,92.150605 150.44645,168.09703 226.50423,92.150605 Z"
+         id="path797" />
+    </g>
+  </g>
+</svg>
