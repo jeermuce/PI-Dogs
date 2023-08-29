@@ -15,6 +15,7 @@
 }
 .active-page {
     background-color: var(--accent);
+    cursor: default;
     color: var(--text);
 }
 .inactive-page {

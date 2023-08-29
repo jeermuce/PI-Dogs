@@ -15,7 +15,6 @@ export function setSearchName(name) {
     return { type: SET_SEARCH_NAME, payload: name };
 }
 export function setPage(page) {
-    console.log("setPage", page);
     return { type: SET_PAGE, payload: page };
 }
 export function toggleFilters(filtersOn) {
@@ -46,13 +45,11 @@ export function getDogs({ page, creation, name }) {
                 totalCount: response.totalCount,
                 dogs: response.dogs.map((dog) => (dog = { name: dog.name })),
             };
-            console.log("payload", payload);
 
             return dispatch({ type: GET_DOGS, payload });
         };
     }
     if (name) {
-        console.log("getDogsByName", name, page, 8);
         return async function (dispatch) {
             const response = await axios
                 .get("http://localhost:3001/dogs?name=" + name)
@@ -63,12 +60,10 @@ export function getDogs({ page, creation, name }) {
                 totalCount: response.totalCount,
                 dogs: response.dogs.slice((page - 1) * 8, (page - 1) * 8 + 8),
             };
-            console.log("payload", payload);
 
             return dispatch({ type: GET_DOGS, payload });
         };
     } else {
-        console.log("getDogsAll", page, 8);
         return async function (dispatch) {
             const response = await axios
                 .get("http://localhost:3001/dogs")
@@ -85,22 +80,6 @@ export function getDogs({ page, creation, name }) {
     }
 }
 
-/* export function searchDogs(name, page) {
-    return async function (dispatch) {
-        const response = await axios
-            .get("http://localhost:3001/dogs?name=" + name)
-            .then((res) => {
-                return res.data;
-            });
-        const payload = {
-            totalCount: response.totalCount,
-            dogs: response.dogs.slice((page - 1) * 8, (page - 1) * 8 + 8),
-        };
-        console.log("payload", payload);
-
-        return dispatch({ type: SEARCH_DOGS, payload });
-    };
-} */
 export function getTemperaments() {
     return async function (dispatch) {
         const response = await axios.get("http://localhost:3001/temperaments");
@@ -109,8 +88,13 @@ export function getTemperaments() {
 }
 
 export function getDogDetail(id) {
-    return async function (dispatch) {
-        const response = await axios.get("http://localhost:3001/dogs/" + id);
-        return dispatch({ type: GET_DOG_DETAIL, payload: response.data });
-    };
+    if (id) {
+        return async function (dispatch) {
+            const response = await axios.get(
+                "http://localhost:3001/dogs/" + id
+            );
+            return dispatch({ type: GET_DOG_DETAIL, payload: response.data });
+        };
+    }
+    return { type: GET_DOG_DETAIL, payload: {} };
 }

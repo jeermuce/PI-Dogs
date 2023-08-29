@@ -5,7 +5,9 @@ import paw from "../../assets/paw.png";
 import Searchbar from "../searchbar/Searchbar";
 import { useDispatch, useSelector } from "react-redux";
 import { createDog, toggleFilters, toggleUnits } from "../../redux/actions";
-
+import home from "../../assets/home_symbol.svg";
+import plus from "../../assets/plus_symbol.svg";
+import { getDogDetail } from "../../redux/actions";
 function Navbar() {
     const unitBool = useSelector((state) => state.reducer.units);
     const location = useLocation().pathname;
@@ -18,6 +20,9 @@ function Navbar() {
     function handleUnitToggle() {
         dispatch(toggleUnits(!unitBool));
     }
+    function handleClick() {
+        dispatch(getDogDetail());
+    }
 
     return (
         <div className="navbar">
@@ -26,23 +31,27 @@ function Navbar() {
             </Link>
             <ul className="navbar-links">
                 {location !== "/home" && (
-                    <li>
-                        <Link to="/home">
-                            <img src="" alt="home" />
-                        </Link>
-                    </li>
+                    <Link to="/home">
+                        <button className="navbar-button" onClick={handleClick}>
+                            <img
+                                src={home}
+                                alt="Home"
+                                className="navbar-icon"
+                            />
+                        </button>
+                    </Link>
                 )}
 
-                <li>
-                    <Link
-                        to="/create"
-                        onClick={() => {
-                            dispatch(createDog());
-                        }}
-                    >
-                        Create
-                    </Link>
-                </li>
+                <Link
+                    to="/create"
+                    onClick={() => {
+                        dispatch(createDog());
+                    }}
+                >
+                    <button className="navbar-button">
+                        <img src={plus} alt="Create" className="navbar-icon" />
+                    </button>
+                </Link>
             </ul>
             <Searchbar />
             <ul className="navbar-links">

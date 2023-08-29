@@ -45,6 +45,7 @@
 
     /* ************* Common ************* */
     --background: var(--background-dark);
+    --background-reverse: var(--background-light);
     --background-hover: var(--background-dark-hover);
     --background-decimal-rgb: var(--background-dark-decimal-rgb);
     --text: var(--text-dark);
@@ -86,6 +87,7 @@ body {
 @media (prefers-color-scheme: light) {
     :root {
         --background: var(--background-light);
+        --background-reverse: var(--background-dark);
         --background-hover: var(--background-light-hover);
         --background-decimal-rgb: var(--background-light-decimal-rgb);
         --text: var(--text-light);

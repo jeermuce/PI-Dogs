@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { getDogDetail } from "../../redux/actions";
 import { useParams } from "react-router-dom";
+import loading from "../../assets/loading.png";
 
 function Details() {
     const { id } = useParams();
@@ -29,7 +30,18 @@ function Details() {
         <div className="details-page">
             <Navbar />
             {dog.name ? (
-                <div className="details-container">
+                <div
+                    className="details-container"
+                    style={
+                        source === "api"
+                            ? { border: "ridge 0.2rem var(--accent)" }
+                            : source === "database"
+                            ? { border: "groove 0.2rem var(--primary)" }
+                            : {
+                                  border: "solid 0.2rem rgba(var(--background-decimal-rgb), 0.8)",
+                              }
+                    }
+                >
                     <div className="details-data-container">
                         <h6
                             style={{
@@ -39,7 +51,6 @@ function Details() {
                             id:{id}
                         </h6>
                         <h1>Breed: {name}</h1>
-
                         <p>Life expectancy: {life_span}</p>
                         {units ? (
                             <p>Height: {height} centimeters</p>
@@ -63,8 +74,22 @@ function Details() {
                     </div>
                 </div>
             ) : (
-                <div className="details-container">
-                    <h1>Loading......</h1>
+                <div
+                    className="details-container"
+                    style={{
+                        height: "fit-content",
+                        backgroundImage: "none",
+                        borderRadius: "50rem",
+                        aspectRatio: "1/1",
+                    }}
+                >
+                    <img
+                        src={loading}
+                        alt="loading"
+                        style={{
+                            height: "10rem",
+                        }}
+                    />
                 </div>
             )}
         </div>
@@ -72,20 +97,3 @@ function Details() {
 }
 
 export default Details;
-/* 
-height: "23 - 29"
-​
-height_imperial: "9 - 11.5"
-​
-id: 1
-​
-image: "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
-​
-life_span: "10 - 12 years"
-​
-name: "Affenpinscher"
-​
-source: "api"
-​
-
-*/

@@ -15,7 +15,7 @@ function Home() {
     const searchName = useSelector((state) => state.reducer.searchName);
     const filtersOn = useSelector((state) => state.reducer.filtersOn);
     const pageState = useSelector((state) => state.reducer.currentPage);
-
+    useEffect(() => {}, [dogs]);
     useEffect(() => {
         if (searchName)
             dispatch(getDogs({ page: pageState, name: searchName }));

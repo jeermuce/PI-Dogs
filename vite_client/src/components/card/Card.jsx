@@ -38,7 +38,11 @@ function dogFound(dog, units) {
                             : "solid 0.2rem rgba(var(--background-decimal-rgb), 0.8)",
                 }}
             >
-                <img src={dog.image} alt="image" className="card-image" />
+                <img
+                    src={dog.image || dog.error}
+                    alt="image"
+                    className="card-image"
+                />
                 <div
                     className="card-data"
                     style={{

@@ -17,8 +17,12 @@ function Pagination() {
         if (currentPage != pageState) {
             dispatch(setPage(currentPage));
         }
+        if (currentPage > totalPages || currentPage < 1) {
+            setCurrentPage(1);
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentPage, pageState]);
+    }, [currentPage, pageState, totalPages]);
 
     function handlePageChange(e) {
         setCurrentPage(e.target.value);

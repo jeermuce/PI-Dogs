@@ -179,7 +179,6 @@ function Create() {
         try {
             await dispatch(createDog(newDog));
         } catch (error) {
-            console.log(`error`);
             // if error 409, dog already exists
             if (error.response.status === 409) {
                 setErrors((prevState) => {

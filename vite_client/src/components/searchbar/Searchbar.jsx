@@ -11,15 +11,14 @@ function Searchbar() {
     const navigate = useNavigate();
     const searchName = useSelector((state) => state.reducer.searchName);
 
-    useEffect(() => {
-        console.log(searchName);
-    }, [searchName]);
+    useEffect(() => {}, [searchName]);
     function handleSearch(e) {
         const name = e.target.value;
         dispatch(setSearchName(name));
     }
     function handleClear() {
         dispatch(setSearchName(""));
+        document.querySelector(".searchbar-input").value = "";
     }
 
     return (

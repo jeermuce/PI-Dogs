@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="299.99973mm"
+   height="299.99982mm"
+   viewBox="0 0 299.99973 299.99982"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="plusSymbol.svg"
+   inkscape:export-filename="..\rick_and_morty\client\src\assets\plus_symbol.png"
+   inkscape:export-xdpi="25.400024"
+   inkscape:export-ydpi="25.400024"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.17858464"
+     inkscape:cx="-109.19192"
+     inkscape:cy="621.55402"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5" />
+  <defs
+     id="defs2">
+    <rect
+       x="196.49043"
+       y="377.63779"
+       width="73.745781"
+       height="60.38245"
+       id="rect290" />
+  </defs>
+  <path
+     d="M 113.20214,0 V 115.66597 H 0 v 68.66788 h 113.20214 v 115.66597 h 74.15724 V 184.33385 H 299.99972 V 115.66597 H 187.35938 V 0 Z"
+     id="path402"
+     style="font-weight:bold;font-size:548.266px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:40.295" />
+</svg>
