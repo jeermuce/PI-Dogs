@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import paw from "../../assets/paw.png";
 import Searchbar from "../searchbar/Searchbar";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFilters, toggleUnits } from "../../redux/actions";
+import { createDog, toggleFilters, toggleUnits } from "../../redux/actions";
 
 function Navbar() {
     const unitBool = useSelector((state) => state.reducer.units);
@@ -32,11 +32,17 @@ function Navbar() {
                         </Link>
                     </li>
                 )}
-                {location !== "/create" && (
-                    <li>
-                        <Link to="/create">Create</Link>
-                    </li>
-                )}
+
+                <li>
+                    <Link
+                        to="/create"
+                        onClick={() => {
+                            dispatch(createDog());
+                        }}
+                    >
+                        Create
+                    </Link>
+                </li>
             </ul>
             <Searchbar />
             <ul className="navbar-links">

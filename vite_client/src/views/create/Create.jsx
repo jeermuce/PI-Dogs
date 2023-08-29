@@ -181,7 +181,13 @@ function Create() {
         } catch (error) {
             console.log(`error`);
             // if error 409, dog already exists
-            alert("Dog already exists");
+            if (error.response.status === 409) {
+                setErrors((prevState) => {
+                    let updatedState = { ...prevState };
+                    updatedState.name = "Dog already exists";
+                    return updatedState;
+                });
+            }
         }
     }
     return (
