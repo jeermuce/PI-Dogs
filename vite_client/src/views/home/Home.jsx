@@ -6,13 +6,16 @@ import Cards from "../../components/cards/Cards";
 import Filters from "../../components/filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { getDogs } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const dogs = useSelector((state) => state.reducer.dogs.dogs);
     const searchName = useSelector((state) => state.reducer.searchName);
     const filtersOn = useSelector((state) => state.reducer.filtersOn);
     const pageState = useSelector((state) => state.reducer.currentPage);
+
     useEffect(() => {
         if (searchName)
             dispatch(getDogs({ page: pageState, name: searchName }));

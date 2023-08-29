@@ -154,7 +154,7 @@ function Create() {
         }
         return false;
     }
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         let newDog = {
@@ -176,7 +176,13 @@ function Create() {
             checkbox.checked = false;
         });
 
-        dispatch(createDog(newDog));
+        try {
+            await dispatch(createDog(newDog));
+        } catch (error) {
+            console.log(`error`);
+            // if error 409, dog already exists
+            alert("Dog already exists");
+        }
     }
     return (
         <>
