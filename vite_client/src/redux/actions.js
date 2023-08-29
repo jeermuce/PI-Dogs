@@ -1,6 +1,6 @@
 import axios from "axios";
 export const GET_DOGS = "GET_DOGS";
-export const SEARCH_DOGS = "SEARCH_DOGS";
+export const SET_SEARCH_NAME = "SET_SEARCH_NAME";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
 export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 export const FILTERS_ON = "FILTERS_ON";
@@ -11,7 +11,9 @@ export const SET_UNITS = "SET_UNITS";
 export function toggleUnits(units) {
     return { type: SET_UNITS, payload: units };
 }
-
+export function setSearchName(name) {
+    return { type: SET_SEARCH_NAME, payload: name };
+}
 export function setPage(page) {
     console.log("setPage", page);
     return { type: SET_PAGE, payload: page };
@@ -32,8 +34,8 @@ export function createDog(dog) {
     return { type: CREATE_DOG, payload: {} };
 }
 
-export function getDogs(page, batchSize) {
-    if (!batchSize) {
+export function getDogs({ page, creation, name }) {
+    if (creation) {
         return async function (dispatch) {
             const response = await axios
                 .get("http://localhost:3001/dogs")
@@ -49,25 +51,41 @@ export function getDogs(page, batchSize) {
             return dispatch({ type: GET_DOGS, payload });
         };
     }
-    return async function (dispatch) {
-        const response = await axios
-            .get("http://localhost:3001/dogs")
-            .then((res) => {
-                return res.data;
-            });
-        const payload = {
-            totalCount: response.totalCount,
-            dogs: response.dogs.slice(
-                (page - 1) * batchSize,
-                (page - 1) * batchSize + batchSize
-            ),
-        };
+    if (name) {
+        console.log("getDogsByName", name, page, 8);
+        return async function (dispatch) {
+            const response = await axios
+                .get("http://localhost:3001/dogs?name=" + name)
+                .then((res) => {
+                    return res.data;
+                });
+            const payload = {
+                totalCount: response.totalCount,
+                dogs: response.dogs.slice((page - 1) * 8, (page - 1) * 8 + 8),
+            };
+            console.log("payload", payload);
 
-        return dispatch({ type: GET_DOGS, payload });
-    };
+            return dispatch({ type: GET_DOGS, payload });
+        };
+    } else {
+        console.log("getDogsAll", page, 8);
+        return async function (dispatch) {
+            const response = await axios
+                .get("http://localhost:3001/dogs")
+                .then((res) => {
+                    return res.data;
+                });
+            const payload = {
+                totalCount: response.totalCount,
+                dogs: response.dogs.slice((page - 1) * 8, (page - 1) * 8 + 8),
+            };
+
+            return dispatch({ type: GET_DOGS, payload });
+        };
+    }
 }
 
-export function searchDogs(name, page, batchSize) {
+/* export function searchDogs(name, page) {
     return async function (dispatch) {
         const response = await axios
             .get("http://localhost:3001/dogs?name=" + name)
@@ -76,16 +94,13 @@ export function searchDogs(name, page, batchSize) {
             });
         const payload = {
             totalCount: response.totalCount,
-            dogs: response.dogs.slice(
-                (page - 1) * batchSize,
-                (page - 1) * batchSize + batchSize
-            ),
+            dogs: response.dogs.slice((page - 1) * 8, (page - 1) * 8 + 8),
         };
         console.log("payload", payload);
 
         return dispatch({ type: SEARCH_DOGS, payload });
     };
-}
+} */
 export function getTemperaments() {
     return async function (dispatch) {
         const response = await axios.get("http://localhost:3001/temperaments");

@@ -10,12 +10,15 @@ import { getDogs } from "../../redux/actions";
 function Home() {
     const dispatch = useDispatch();
     const dogs = useSelector((state) => state.reducer.dogs.dogs);
+    const searchName = useSelector((state) => state.reducer.searchName);
     const filtersOn = useSelector((state) => state.reducer.filtersOn);
     const pageState = useSelector((state) => state.reducer.currentPage);
     useEffect(() => {
-        dispatch(getDogs(pageState, 8));
+        if (searchName)
+            dispatch(getDogs({ page: pageState, name: searchName }));
+        else dispatch(getDogs({ page: pageState, batchSize: 8 }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pageState]);
+    }, [pageState, searchName]);
     return (
         <div className="home-page">
             <Navbar filtersOn={filtersOn} />

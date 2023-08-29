@@ -35,7 +35,7 @@ async function getDogByName(name) {
 
         dogs.sort();
 
-        const totalDogs = [...parsedDbDogs, ...apiDogs];
+        let totalDogs = [...parsedDbDogs, ...apiDogs];
 
         dogs = { dogs: totalDogs, totalCount };
         return dogs;

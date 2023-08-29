@@ -39,7 +39,7 @@ function validate(input, name, errors, setErrors) {
             outOfRange: "must be positive",
         },
         temperaments: {
-            empty: "pick or type one or more",
+            empty: "pick/type one or more",
         },
     };
 

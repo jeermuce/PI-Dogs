@@ -9,6 +9,7 @@ function Landing() {
     useEffect(() => {
         dispatch(getTemperaments());
     }, []);
+
     return (
         <div className="landing">
             <Link to="/home">

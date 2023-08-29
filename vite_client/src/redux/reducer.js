@@ -4,8 +4,8 @@ import {
     GET_DOGS,
     GET_DOG_DETAIL,
     GET_TEMPERAMENTS,
-    SEARCH_DOGS,
     SET_PAGE,
+    SET_SEARCH_NAME,
     SET_UNITS,
 } from "./actions";
 
@@ -28,16 +28,17 @@ const initialState = {
 };
 function reducer(state = initialState, { type, payload }) {
     switch (type) {
+        case SET_SEARCH_NAME:
+            return {
+                ...state,
+                searchName: payload,
+            };
         case GET_DOGS:
             return {
                 ...state,
                 dogs: payload,
             };
-        case SEARCH_DOGS:
-            return {
-                ...state,
-                dogs: payload,
-            };
+
         case GET_TEMPERAMENTS:
             return {
                 ...state,

@@ -62,11 +62,9 @@ async function createDog(dog, aDogHasBeenCreated) {
             },
         });
         createdDog = parseDbDog(createdDog.dataValues);
-        console.log("createdDog", createdDog);
 
         aDogHasBeenCreated = true;
         const code = 201; //201 Created
-        console.log("code", code);
         return { code, aDogHasBeenCreated, createdDog };
     } catch (error) {
         throw error;

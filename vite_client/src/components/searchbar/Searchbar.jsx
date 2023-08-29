@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./searchbar.css";
 import magnifier from "../../assets/magnifier.svg";
 import cross from "../../assets/cross.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { searchDogs } from "../../redux/actions";
+import { setSearchName } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 function Searchbar() {
-    const page = useSelector((state) => state.reducer.currentPage);
-    console.log(page);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const searchName = useSelector((state) => state.reducer.searchName);
+
+    useEffect(() => {
+        console.log(searchName);
+    }, [searchName]);
     function handleSearch(e) {
         const name = e.target.value;
-
-        dispatch(searchDogs(e.target.value, page, 8));
+        dispatch(setSearchName(name));
     }
+    function handleClear() {
+        dispatch(setSearchName(""));
+    }
+
     return (
         <div className="searchbar-section">
             <input
@@ -21,10 +29,14 @@ function Searchbar() {
                 className="searchbar-input"
                 onChange={handleSearch}
             />
-            <button className="searchbar-button-clear">
+            <button className="searchbar-button-clear" onClick={handleClear}>
                 <img src={cross} alt="clear-icon" className="searchbar-icon" />
             </button>
-            <button className="searchbar-button-submit">
+
+            <button
+                className="searchbar-button-submit"
+                onClick={() => navigate(`/home`)}
+            >
                 <img
                     src={magnifier}
                     alt="search-icon"

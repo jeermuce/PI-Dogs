@@ -12,7 +12,7 @@ function Create() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getDogs());
+        dispatch(getDogs({ creation: true }));
     }, []);
     const allDogs = useSelector((state) => state.reducer.dogs.dogs);
 
@@ -50,7 +50,6 @@ function Create() {
     );
 
     useEffect(() => {
-        console.log("createdDog", createdDog);
         if (createdDog && createdDog.id) {
             navigate(`/home/${createdDog.id}`);
         }
