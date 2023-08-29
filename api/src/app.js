@@ -15,10 +15,13 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
+    const allowedOrigins = ["*"]; // TODO: replace with deployed client URL
+
     const origin = req.headers.origin;
-    if (origin && origin.endsWith("173")) {
-        res.setHeader("Access-Control-Allow-Origin", origin);
-    } // update to match the domain you will make the request from
+    if (allowedOrigins.includes(origin)) {
+        res.header("Access-Control-Allow-Origin", origin);
+    }
+
     res.header("Access-Control-Allow-Credentials", "true");
     res.header(
         "Access-Control-Allow-Headers",
@@ -28,7 +31,7 @@ server.use((req, res, next) => {
         "Access-Control-Allow-Methods",
         "GET, POST, OPTIONS, PUT, DELETE"
     );
-    res.header("Content-Type", "application/json; charset=utf-8");
+
     next();
 });
 

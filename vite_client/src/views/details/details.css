@@ -1,0 +1,51 @@
+.details-page {
+    height: 100vh;
+}
+.details-container {
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    max-width: 40rem;
+
+    margin-inline: auto;
+    background-image: var(--background-image);
+}
+.details-title-h1 {
+    background-image: var(--background);
+    margin: 0;
+    width: 16rem;
+    text-align: center;
+    font-size: 1.5rem;
+    top: 2rem;
+    left: calc((100% - 16rem) / 2);
+    position: relative;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.details-data-container /* first child */ {
+    flex-basis: 20rem;
+    background-color: rgba(var(--secondary-decimal-rgb), 0.8);
+    border-radius: 0.6rem;
+    flex-grow: 9999;
+}
+.details-dog-image-container /* last child */ {
+    flex-basis: 15rem;
+    overflow: hidden;
+    flex-grow: 1;
+}
+.details-dog-image {
+    border-radius: 0.6rem;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: top;
+}
+.details-id-p {
+    opacity: 0.3;
+    font-size: 0.6rem;
+}

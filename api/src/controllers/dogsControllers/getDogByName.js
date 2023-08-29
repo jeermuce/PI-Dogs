@@ -6,7 +6,6 @@ const { parseApiDogs } = require("../../utils/parseApiDogs");
 
 async function getDogByName(name) {
     try {
-        console.log(name);
         name = name.trim().toLowerCase();
         let dogs = await Dog.findAll({
             where: {

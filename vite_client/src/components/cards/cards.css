@@ -1,0 +1,12 @@
+.box {
+    height: 100%;
+    width: 100%;
+    scrollbar-width: thin;
+    overflow-y: scroll;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem, 80%), 1fr));
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+    box-sizing: border-box;
+}

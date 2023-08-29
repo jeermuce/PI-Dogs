@@ -9,8 +9,8 @@ let initialState = {
         totalCount: 174,
         dogs: [
             {
-                id: "bba51e40-f3b2-4baa-8da1-a4c22a37ad48",
-                name: "English muffin",
+                id: "1",
+                name: "Test Dog ",
                 weight: "3 - 4",
                 weight_imperial: "6.61 - 8.82",
                 height: "1 - 2",
@@ -66,10 +66,10 @@ let initialState = {
     }, //! from the form
 };
 
-function rootReducer(state = initialState, action) {
+function reducer(state = initialState, action) {
     switch (action.type) {
         default:
             return state;
     }
 }
-export default rootReducer;
+export default reducer;

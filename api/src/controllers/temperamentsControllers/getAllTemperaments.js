@@ -4,15 +4,13 @@ const { axiosCaller } = require("../../utils/axiosCaller");
 const { getTemperamentsFromDb } = require("../../utils/getTemperamentsFromDb");
 
 let isFirstRun = true;
-
 async function getAllTemperaments() {
     try {
         if (!isFirstRun) {
             const dbTemperaments = (await getTemperamentsFromDb()).temperaments;
-
             return {
+                totalCount: dbTemperaments.length,
                 temperaments: dbTemperaments,
-                message: `${dbTemperaments.length} temperaments found in database`,
             };
         }
 
@@ -36,11 +34,12 @@ async function getAllTemperaments() {
             { updateOnDuplicate: ["name"] }
         );
         const dbTemperaments = (await getTemperamentsFromDb()).temperaments;
-
+        const totalCount = dbTemperaments.length;
         isFirstRun = false;
+
         return {
+            totalCount,
             temperaments: dbTemperaments,
-            totalCount: dbTemperaments.length,
         };
     } catch (error) {
         throw error;

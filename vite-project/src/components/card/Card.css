@@ -1,0 +1,22 @@
+.Card {
+    perspective: 1000px;
+    border: ridge 1px var(--primary);
+    border-radius: 0.6rem;
+    aspect-ratio: 1/7;
+    overflow: hidden;
+    background-color: transparent;
+}
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.card-hidden {
+    visibility: hidden;
+}
+.card-hidden:hover {
+    visibility: visible;
+}

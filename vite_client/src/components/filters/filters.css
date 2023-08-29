@@ -1,0 +1,16 @@
+.filters {
+    grid: filters;
+    /* center self */
+    justify-self: center;
+    height: 2rem;
+    width: fit-content;
+    background-color: var(--accent);
+    border-radius: 1rem;
+    text-align: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem 0 0.5rem;
+    gap: 1rem;
+}
