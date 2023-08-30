@@ -5,23 +5,25 @@ import Pagination from "../../components/pagination/Pagination";
 import Cards from "../../components/cards/Cards";
 import Filters from "../../components/filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogs } from "../../redux/actions";
+import { getDogs, getDogsByName } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const dogs = useSelector((state) => state.reducer.dogs.dogs);
+    let dogs = useSelector((state) => state.reducer.dogs);
     const searchName = useSelector((state) => state.reducer.searchName);
     const filtersOn = useSelector((state) => state.reducer.filtersOn);
     const pageState = useSelector((state) => state.reducer.currentPage);
-    useEffect(() => {}, [dogs]);
+    const createdDog = useSelector((state) => state.reducer.createdDog);
+    useEffect(() => {}, [createdDog]);
     useEffect(() => {
-        if (searchName)
-            dispatch(getDogs({ page: pageState, name: searchName }));
-        else dispatch(getDogs({ page: pageState, batchSize: 8 }));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        if (searchName) dispatch(getDogsByName(searchName));
+        else dispatch(getDogs());
     }, [pageState, searchName]);
+
+    let pageDogs = dogs.slice((pageState - 1) * 8, pageState * 8);
+
     return (
         <div className="home-page">
             <Navbar filtersOn={filtersOn} />
@@ -35,7 +37,7 @@ function Home() {
                 ></div>
             )}
 
-            <Cards dogs={dogs} />
+            <Cards dogs={pageDogs} />
             <Pagination />
         </div>
     );

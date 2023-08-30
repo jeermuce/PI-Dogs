@@ -40,7 +40,7 @@ function Create() {
     let temperaments = useSelector(
         (state) => state.reducer.temperaments.temperaments
     );
-    
+
     temperaments = temperaments.map((temperament) =>
         temperament.name.capitalize()
     );
@@ -173,7 +173,7 @@ function Create() {
         });
 
         try {
-            await dispatch(createDog(newDog));
+            dispatch(createDog(newDog));
         } catch (error) {
             // if error 409, dog already exists
             if (error.response.status === 409) {

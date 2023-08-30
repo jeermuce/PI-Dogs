@@ -2,6 +2,7 @@ import {
     CREATE_DOG,
     FILTERS_ON,
     GET_DOGS,
+    GET_DOGS_BY_NAME,
     GET_DOG_DETAIL,
     GET_DOG_NAMES,
     GET_TEMPERAMENTS,
@@ -16,17 +17,10 @@ const initialState = {
     currentPage: 1,
     createdDog: {},
     filtersOn: false,
-    filters: {},
     count: 0,
-    dogs: {
-        totalCount: 0,
-        dogs: [],
-    },
+    dogs: [],
     dogDetail: {},
-    temperaments: {
-        totalCount: 0,
-        temperaments: [],
-    },
+    temperaments: [],
     searchName: "",
 };
 function reducer(state = initialState, { type, payload }) {
@@ -36,6 +30,12 @@ function reducer(state = initialState, { type, payload }) {
                 ...state,
                 searchName: payload,
             };
+        case GET_DOGS_BY_NAME:
+            return {
+                ...state,
+                dogs: payload,
+            };
+
         case GET_DOGS:
             return {
                 ...state,
