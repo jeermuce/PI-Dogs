@@ -8,6 +8,7 @@ import { createDog, getDogNames, getTemperaments } from "../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 function Create() {
+    //todo: handle API Errors
     const navigate = useNavigate();
     const dispatch = useDispatch();
     String.prototype.capitalize = function () {
@@ -145,6 +146,12 @@ function Create() {
         }
         return false;
     }
+    function disabledBecauseOfApiErrors() {
+        if (temperaments.includes("API Error")) {
+            return true;
+        }
+        return false;
+    }
     async function handleSubmit(event) {
         event.preventDefault();
 
@@ -223,6 +230,7 @@ function Create() {
                         }}
                     >
                         <input
+                            disabled={disabledBecauseOfApiErrors()}
                             style={{ display: "none" }}
                             key={temperament}
                             type="checkbox"
@@ -252,6 +260,7 @@ function Create() {
                                 {input}:
                             </label>
                             <input
+                                disabled={disabledBecauseOfApiErrors()}
                                 className="single-input-input"
                                 type="text"
                                 /* if input is Image, placeholder is url, otherwise it is input */
@@ -276,6 +285,7 @@ function Create() {
                                     {input.replace(/_/g, " ")}:
                                 </label>
                                 <input
+                                    disabled={disabledBecauseOfApiErrors()}
                                     className="double-input-input"
                                     type=""
                                     placeholder="Low"
@@ -283,6 +293,7 @@ function Create() {
                                     id={`${input.toLowerCase()}_low`}
                                 />
                                 <input
+                                    disabled={disabledBecauseOfApiErrors()}
                                     className="double-input-input"
                                     type=""
                                     placeholder="High"
@@ -314,6 +325,7 @@ function Create() {
                             Temperaments:
                         </label>
                         <input
+                            disabled={disabledBecauseOfApiErrors()}
                             className="single-input-input"
                             type="text"
                             placeholder="Temperaments"

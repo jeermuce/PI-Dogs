@@ -28,6 +28,7 @@ const initialState = {
         attribute: "all",
     },
     dogs: [],
+    dogsBackup: [],
     dogDetail: {},
     temperaments: [],
     searchName: "",

@@ -42,13 +42,21 @@ export function getDogsByName(name) {
         return { type: GET_DOGS_BY_NAME, payload: dogs };
     }
     return async function (dispatch) {
-        const response = await axios.get(
-            `http://localhost:3001/dogs?name=${name}`
-        );
-        return dispatch({
-            type: GET_DOGS_BY_NAME,
-            payload: response.data.dogs,
-        });
+        try {
+            const response = await axios.get(
+                `http://localhost:3001/dogs?name=${name}`
+            );
+            return dispatch({
+                type: GET_DOGS_BY_NAME,
+                payload: response.data.dogs,
+            });
+        } catch (err) {
+            console.log(err);
+            return dispatch({
+                type: GET_DOGS_BY_NAME,
+                payload: ["API Error", `Error: ${err}`],
+            });
+        }
     };
 }
 export function setPage(page) {
@@ -60,51 +68,119 @@ export function toggleFilters(filtersOn) {
 export function createDog(dog) {
     if (dog) {
         return async function (dispatch) {
-            const response = await axios.post(
-                "http://localhost:3001/dogs",
-                dog
-            );
-            return dispatch({ type: CREATE_DOG, payload: response.data });
+            try {
+                const response = await axios.post(
+                    "http://localhost:3001/dogs",
+                    dog
+                );
+                return dispatch({ type: CREATE_DOG, payload: response.data });
+            } catch (err) {
+                console.log(err);
+                return dispatch({
+                    type: CREATE_DOG,
+                    payload: { id: "API error", err },
+                });
+            }
         };
     }
     return { type: CREATE_DOG, payload: {} };
 }
 export function getDogNames() {
     return async function (dispatch) {
-        const response = await axios.get("http://localhost:3001/dogs");
-        const payload = response.data.dogs.map((dog) => (dog = dog.name));
-        return dispatch({ type: GET_DOG_NAMES, payload });
+        try {
+            const response = await axios.get("http://localhost:3001/dogs");
+            const payload = response.data.dogs.map((dog) => (dog = dog.name));
+            return dispatch({ type: GET_DOG_NAMES, payload });
+        } catch (err) {
+            console.log(err);
+            return dispatch({
+                type: GET_DOG_NAMES,
+                payload: ["API Error", `Error: ${err}`],
+            });
+        }
     };
 }
 
 export function getDogs() {
     return async function (dispatch) {
-        const response = await axios.get("http://localhost:3001/dogs");
-        const payload = response.data.dogs;
-        return dispatch({ type: GET_DOGS, payload });
+        try {
+            const response = await axios.get("http://localhost:3001/dogs");
+            const payload = response.data.dogs;
+            return dispatch({ type: GET_DOGS, payload });
+        } catch (err) {
+            console.log(err);
+            return dispatch({
+                type: GET_DOGS,
+                payload: ["API Error", `Error: ${err}`],
+            });
+        }
     };
 }
 
 export function getTemperaments() {
     return async function (dispatch) {
-        const response = await axios.get("http://localhost:3001/temperaments");
-        return dispatch({
-            type: GET_TEMPERAMENTS,
-            payload: response.data.temperaments.map(
+        try {
+            const response = await axios.get(
+                "http://localhost:3001/temperaments"
+            );
+            const payload = response.data.temperaments.map(
                 (temp) => (temp = temp.name)
-            ),
-        });
+            );
+            return dispatch({ type: GET_TEMPERAMENTS, payload });
+        } catch (err) {
+            console.log(err);
+            return dispatch({
+                type: GET_TEMPERAMENTS,
+                payload: ["API Error", `Error: ${err}`],
+            });
+        }
     };
 }
 
 export function getDogDetail(id) {
     if (id) {
         return async function (dispatch) {
+            /* 
             const response = await axios.get(
                 "http://localhost:3001/dogs/" + id
             );
-            return dispatch({ type: GET_DOG_DETAIL, payload: response.data });
+            return dispatch({ type: GET_DOG_DETAIL, payload: response.data }); */
+            try {
+                const response = await axios.get(
+                    "http://localhost:3001/dogs/" + id
+                );
+                return dispatch({
+                    type: GET_DOG_DETAIL,
+                    payload: response.data,
+                });
+            } catch (err) {
+                console.log(err);
+                return dispatch({
+                    type: GET_DOG_DETAIL,
+                    payload: {
+                        name: `API error: ${err}`,
+                        height: "API error",
+                        height_imperial: "API error",
+                        weight: "API error",
+                        weight_imperial: "API error",
+                        life_span: "API error",
+                        image: "https://i.imgur.com/nFCmvLG.png",
+                        temperaments: ["API error", "API error"],
+                    },
+                });
+            }
         };
     }
     return { type: GET_DOG_DETAIL, payload: {} };
 }
+/* 
+        height,
+        height_imperial,
+        image,
+        life_span,
+        name,
+        source,
+        weight,
+        weight_imperial,
+        temperaments,
+*/
