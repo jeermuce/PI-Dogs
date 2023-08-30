@@ -24,7 +24,7 @@
     margin: 0;
     height: 100%;
     border: none;
-    background-color: var(--secondary);
+    background-color: var(--background);
     cursor: pointer;
 }
 .searchbar-button-clear {
@@ -36,6 +36,6 @@
     margin: 0;
     height: 100%;
     border: none;
-    background-color: var(--secondary);
+    background-color: var(--background);
     cursor: pointer;
 }

@@ -1,17 +1,11 @@
-import React, { Component, useEffect, useState } from "react";
-import "./home.css";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Pagination from "../../components/pagination/Pagination";
 import Cards from "../../components/cards/Cards";
 import Filters from "../../components/filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    filterDogs,
-    getDogs,
-    getDogsByName,
-    setCount,
-} from "../../redux/actions";
-import { useNavigate } from "react-router-dom";
+import { filterDogs, getDogs, getDogsByName } from "../../redux/actions";
+import "./home.css";
 
 function Home() {
     const dispatch = useDispatch();

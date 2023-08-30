@@ -51,9 +51,7 @@ function Navbar() {
                         dispatch(createDog());
                     }}
                 >
-                    <button className="navbar-button">
-                        <img src={plus} alt="Create" className="navbar-icon" />
-                    </button>
+                    <button className="navbar-button">Create</button>
                 </Link>
             </ul>
             <Searchbar />
@@ -68,7 +66,7 @@ function Navbar() {
                         }
                         onClick={handleUnitToggle}
                     >
-                        Units:{unitBool ? "SI" : "US"}
+                        Units: {unitBool ? "SI" : "US"}
                     </button>
                 </li>
                 <li>
@@ -81,7 +79,7 @@ function Navbar() {
                         }
                         onClick={handleFiltersToggle}
                     >
-                        <img src="" alt="Filters" />
+                        Filters
                     </button>
                 </li>
             </ul>

@@ -61,7 +61,7 @@
 }
 .navbar-button {
     max-height: 2rem;
-    aspect-ratio: 1;
+    width: fit-content;
     transition: scale 0.2s ease-in-out;
     display: flex;
     flex-flow: row nowrap;
@@ -71,9 +71,10 @@
     margin: 0;
     height: 1.7rem;
     border: none;
-    background-color: var(--secondary);
+    background-color: var(--background);
     cursor: pointer;
 }
 .navbar-icon {
     height: 1.4rem;
+    width: 1.4rem;
 }
