@@ -4,18 +4,12 @@ import createDogHandleChange from "../../utils/createDogHandleChange";
 const doubleInput = ["Height", "Weight", "Life_span"];
 const singleInput = ["Name", "Image"];
 import { useDispatch, useSelector } from "react-redux";
-import { createDog, getDogNames } from "../../redux/actions";
+import { createDog, getDogNames, getTemperaments } from "../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 function Create() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getDogNames());
-    }, []);
-    const allDogs = useSelector((state) => state.reducer.dogNames);
-
     String.prototype.capitalize = function () {
         if (
             this === "" ||
@@ -35,15 +29,16 @@ function Create() {
         capitalizedStr = capitalizedStr.trim();
         return capitalizedStr;
     };
+
+    useEffect(() => {
+        dispatch(getDogNames());
+        dispatch(getTemperaments());
+    }, []);
+    const allDogs = useSelector((state) => state.reducer.dogNames);
+
     const unitBool = useSelector((state) => state.reducer.units);
     const createdDog = useSelector((state) => state.reducer.createdDog);
-    let temperaments = useSelector(
-        (state) => state.reducer.temperaments.temperaments
-    );
-
-    temperaments = temperaments.map((temperament) =>
-        temperament.name.capitalize()
-    );
+    let temperaments = useSelector((state) => state.reducer.temperaments);
 
     useEffect(() => {
         if (createdDog && createdDog.id) {

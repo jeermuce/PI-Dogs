@@ -5,7 +5,9 @@ import { setPage } from "../../redux/actions";
 function Pagination() {
     const dispatch = useDispatch();
     const pageState = useSelector((state) => state.reducer.currentPage);
-    const totalCount = useSelector((state) => state.reducer.dogs.length);
+    const searchName = useSelector((state) => state.reducer.searchName);
+    let totalCount = useSelector((state) => state.reducer.count);
+    const filters = useSelector((state) => state.reducer.filters);
     const totalPages = Math.ceil(totalCount / 8);
     const pages = [];
     const [currentPage, setCurrentPage] = useState(pageState);
@@ -13,15 +15,14 @@ function Pagination() {
     for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
     }
+
     useEffect(() => {
-        if (currentPage != pageState) {
+        if (currentPage !== pageState && currentPage <= totalPages) {
             dispatch(setPage(currentPage));
         }
         if (currentPage > totalPages || currentPage < 1) {
             setCurrentPage(1);
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage, pageState, totalPages]);
 
     function handlePageChange(e) {

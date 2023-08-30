@@ -29,6 +29,9 @@ function Navbar() {
             <Link to="/">
                 <img src={paw} alt="logo" className="paw-logo-navbar" />
             </Link>
+            <Link to="/">
+                <p>Landing</p>
+            </Link>
             <ul className="navbar-links">
                 {location !== "/home" && (
                     <Link to="/home">
@@ -65,7 +68,7 @@ function Navbar() {
                         }
                         onClick={handleUnitToggle}
                     >
-                        {unitBool ? "SI" : "US"}
+                        Units:{unitBool ? "SI" : "US"}
                     </button>
                 </li>
                 <li>
@@ -78,7 +81,7 @@ function Navbar() {
                         }
                         onClick={handleFiltersToggle}
                     >
-                        <img src="" alt="FI" />
+                        <img src="" alt="Filters" />
                     </button>
                 </li>
             </ul>

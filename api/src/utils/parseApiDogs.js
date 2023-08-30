@@ -29,6 +29,7 @@ function parseApiDog(apiDog, client) {
         } else if (client === "dogById" || client === "dogsByName") {
             image = `https://cdn2.thedogapi.com/images/${apiDog.reference_image_id}.jpg`;
         }
+
         return {
             id: apiDog.id,
             name: apiDog.name,

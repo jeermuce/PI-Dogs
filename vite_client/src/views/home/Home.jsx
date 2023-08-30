@@ -5,24 +5,59 @@ import Pagination from "../../components/pagination/Pagination";
 import Cards from "../../components/cards/Cards";
 import Filters from "../../components/filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogs, getDogsByName } from "../../redux/actions";
+import {
+    filterDogs,
+    getDogs,
+    getDogsByName,
+    setCount,
+} from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     let dogs = useSelector((state) => state.reducer.dogs);
+    const count = useSelector((state) => state.reducer.count);
     const searchName = useSelector((state) => state.reducer.searchName);
     const filtersOn = useSelector((state) => state.reducer.filtersOn);
+    const filters = useSelector((state) => state.reducer.filters);
     const pageState = useSelector((state) => state.reducer.currentPage);
     const createdDog = useSelector((state) => state.reducer.createdDog);
-    useEffect(() => {}, [createdDog]);
+    const [pageDogs, setPageDogs] = useState([]);
     useEffect(() => {
-        if (searchName) dispatch(getDogsByName(searchName));
-        else dispatch(getDogs());
-    }, [pageState, searchName]);
+        !count && dispatch(getDogs());
+    }, [count]);
 
-    let pageDogs = dogs.slice((pageState - 1) * 8, pageState * 8);
+    useEffect(() => {
+        if (
+            searchName !== "" &&
+            searchName !== undefined &&
+            searchName !== null
+        )
+            dispatch(getDogsByName(searchName));
+        else if (!filtersOn && createdDog.name) dispatch(getDogs());
+        else if (
+            (searchName === "" ||
+                searchName === undefined ||
+                searchName === null ||
+                pageState !== 1) &&
+            !filtersOn
+        ) {
+            dispatch(getDogs());
+        }
+    }, [searchName, createdDog]);
+    useEffect(() => {
+        if (createdDog.name) {
+            dispatch(getDogs());
+        }
+    }, [createdDog]);
+
+    useEffect(() => {
+        setPageDogs(dogs.slice((pageState - 1) * 8, pageState * 8));
+    }, [dogs, pageState, searchName]);
+
+    useEffect(() => {
+        filtersOn ? dispatch(filterDogs()) : null;
+    }, [filters, filtersOn]);
 
     return (
         <div className="home-page">
