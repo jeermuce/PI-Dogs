@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 function Searchbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const searchName = useSelector((state) => state.reducer.searchName);
 
     function handleSearch(e) {
         const name = e.target.value;

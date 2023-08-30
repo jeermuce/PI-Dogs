@@ -9,7 +9,6 @@
     height: 100%;
 }
 .searchbar-input {
-    /* br on left, no r on right */
     border-radius: 0.3rem 0 0 0.3rem;
     margin: 0;
     width: 8rem;

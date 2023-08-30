@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./navbar.css";
 import { Link, useLocation } from "react-router-dom";
 import paw from "../../assets/paw.png";
@@ -6,7 +6,6 @@ import Searchbar from "../searchbar/Searchbar";
 import { useDispatch, useSelector } from "react-redux";
 import { createDog, toggleFilters, toggleUnits } from "../../redux/actions";
 import home from "../../assets/home_symbol.svg";
-import plus from "../../assets/plus_symbol.svg";
 import { getDogDetail } from "../../redux/actions";
 function Navbar() {
     const unitBool = useSelector((state) => state.reducer.units);

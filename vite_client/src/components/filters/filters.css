@@ -1,6 +1,5 @@
 .filters {
     grid: filters;
-    /* center self */
     justify-self: center;
     height: 2rem;
     width: fit-content;

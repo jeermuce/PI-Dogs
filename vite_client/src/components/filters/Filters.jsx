@@ -1,18 +1,12 @@
 import React from "react";
 import "./filters.css";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    clearFilters,
-    getDogs,
-    getTemperaments,
-    setFilters,
-} from "../../redux/actions";
+import { clearFilters, getTemperaments, setFilters } from "../../redux/actions";
 import { useEffect, useState } from "react";
 
 function Filters() {
     const dispatch = useDispatch();
     const temperaments = useSelector((state) => state.reducer.temperaments);
-    const filtersOn = useSelector((state) => state.reducer.filtersOn);
     const [orderDirection, setOrderDirection] = useState(true);
     const [orderBy, setOrderBy] = useState("name");
     const [showFromSource, setShowFromSource] = useState("all");
@@ -37,6 +31,13 @@ function Filters() {
     }, []);
     function handleClear() {
         dispatch(clearFilters());
+        setShowFromSource("all");
+        setShowWithTemperament("all");
+        setOrderBy("name");
+        setOrderDirection(true);
+        document.getElementById("showFromSource").value = "all";
+        document.getElementById("showWithTemperament").value = "all";
+        document.getElementById("orderBy").value = "name";
     }
     return (
         <div className="filters">

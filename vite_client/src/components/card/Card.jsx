@@ -1,6 +1,6 @@
 import React from "react";
 import "./card.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Card({ dog }) {
@@ -23,10 +23,17 @@ function noMatches(dog) {
         </div>
     );
 }
+function parseImageError(dog) {
+    const imageLinkEnd = dog.image.split("/").pop();
+    if (imageLinkEnd === ".jpg" || imageLinkEnd === ".png") {
+        return (dogImageError = "Image error");
+    }
+    return dog.image;
+}
 
 function dogFound(dog, units) {
     return (
-        <NavLink to={`/home/${dog.id}`}>
+        <Link to={`/home/${dog.id}`}>
             <div
                 className="card"
                 style={{
@@ -38,11 +45,7 @@ function dogFound(dog, units) {
                             : "solid 0.2rem rgba(var(--background-decimal-rgb), 0.8)",
                 }}
             >
-                <img
-                    src={dog.image || dog.error}
-                    alt="image"
-                    className="card-image"
-                />
+                <img src={dog.image} alt={dog.image} className="card-image" />
                 <div
                     className="card-data"
                     style={{
@@ -65,7 +68,7 @@ function dogFound(dog, units) {
                     <h3>{dog.temperaments && dog.temperaments.join(", ")}</h3>
                 </div>
             </div>
-        </NavLink>
+        </Link>
     );
 }
 /* background-color: rgba(var(--accent-decimal-rgb), 0.8); */

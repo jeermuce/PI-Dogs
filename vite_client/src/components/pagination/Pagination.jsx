@@ -5,9 +5,7 @@ import { setPage } from "../../redux/actions";
 function Pagination() {
     const dispatch = useDispatch();
     const pageState = useSelector((state) => state.reducer.currentPage);
-    const searchName = useSelector((state) => state.reducer.searchName);
     let totalCount = useSelector((state) => state.reducer.count);
-    const filters = useSelector((state) => state.reducer.filters);
     const totalPages = Math.ceil(totalCount / 8);
     const pages = [];
     const [currentPage, setCurrentPage] = useState(pageState);

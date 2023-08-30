@@ -5,7 +5,6 @@
     grid-template-columns: 1fr;
     display: grid;
 
-    /* center objects in their grid slot */
     place-items: center;
 }
 .details-container {

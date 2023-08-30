@@ -30,10 +30,6 @@ export function setFilters(filters) {
     return { type: SET_FILTERS, payload: filters };
 }
 
-export function setOrder(order) {
-    return { type: SET_ORDER, payload: order };
-}
-
 export function toggleUnits(units) {
     return { type: SET_UNITS, payload: units };
 }
