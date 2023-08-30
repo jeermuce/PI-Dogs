@@ -6,7 +6,15 @@ import Home from "./views/home/Home";
 import Create from "./views/create/Create";
 import Landing from "./views/landing/Landing";
 import Details from "./views/details/Details";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getTemperaments } from "./redux/actions";
 function App() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getTemperaments());
+    }, []);
+
     return (
         <section className="App">
             <Routes>

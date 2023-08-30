@@ -1,7 +1,8 @@
-function validate(input, name, errors, setErrors) {
+function validate(input, name, errors, setErrors, form) {
     const errorMessages = {
         name: {
             empty: "mandatory",
+            invalidFirstChar: "must start with a letter",
         },
         image: {
             empty: "mandatory",
@@ -49,6 +50,8 @@ function validate(input, name, errors, setErrors) {
         case "name":
             if (input === "") {
                 errorMessage = errorMessages.name.empty;
+            } else if (input[0] < "A" || input[0] > "z") {
+                errorMessage = errorMessages.name.invalidFirstChar;
             }
             break;
         case "image":
@@ -79,7 +82,6 @@ function validate(input, name, errors, setErrors) {
             } else if (input < 0) {
                 errorMessage = errorMessages[name].outOfRange;
             }
-
             break;
         case "temperaments":
             if (input === "") {

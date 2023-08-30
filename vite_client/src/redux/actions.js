@@ -1,5 +1,6 @@
 import axios from "axios";
 export const GET_DOGS = "GET_DOGS";
+export const GET_DOG_NAMES = "GET_DOG_NAMES";
 export const SET_SEARCH_NAME = "SET_SEARCH_NAME";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
 export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
@@ -31,6 +32,13 @@ export function createDog(dog) {
         };
     }
     return { type: CREATE_DOG, payload: {} };
+}
+export function getDogNames() {
+    return async function (dispatch) {
+        const response = await axios.get("http://localhost:3001/dogs");
+        const payload = response.data.dogs.map((dog) => (dog = dog.name));
+        return dispatch({ type: GET_DOG_NAMES, payload });
+    };
 }
 
 export function getDogs({ page, creation, name }) {

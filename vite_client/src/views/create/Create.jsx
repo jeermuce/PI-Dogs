@@ -4,7 +4,7 @@ import createDogHandleChange from "../../utils/createDogHandleChange";
 const doubleInput = ["Height", "Weight", "Life_span"];
 const singleInput = ["Name", "Image"];
 import { useDispatch, useSelector } from "react-redux";
-import { createDog, getDogs } from "../../redux/actions";
+import { createDog, getDogNames } from "../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 function Create() {
@@ -12,9 +12,9 @@ function Create() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getDogs({ creation: true }));
+        dispatch(getDogNames());
     }, []);
-    const allDogs = useSelector((state) => state.reducer.dogs.dogs);
+    const allDogs = useSelector((state) => state.reducer.dogNames);
 
     String.prototype.capitalize = function () {
         if (
@@ -26,17 +26,12 @@ function Create() {
         ) {
             return this;
         }
-        //split string into an array of words based on spaces
         let strArr = this.split(" ");
-        //trim each word
         strArr = strArr.map((word) => word.trim());
-        //capitalize each word
         strArr = strArr.map((word) => {
             return word.charAt(0).toUpperCase() + word.slice(1);
         });
-        //join the array back into a string
         let capitalizedStr = strArr.join(" ");
-        //trim the string
         capitalizedStr = capitalizedStr.trim();
         return capitalizedStr;
     };
@@ -45,6 +40,7 @@ function Create() {
     let temperaments = useSelector(
         (state) => state.reducer.temperaments.temperaments
     );
+    
     temperaments = temperaments.map((temperament) =>
         temperament.name.capitalize()
     );
@@ -108,7 +104,7 @@ function Create() {
             return;
         }
         allDogs.forEach((dog) => {
-            if (dog.name.toLowerCase() === form.name.toLowerCase()) {
+            if (dog.toLowerCase() === form.name.toLowerCase()) {
                 dogExists = true;
             }
         });

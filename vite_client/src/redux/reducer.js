@@ -3,6 +3,7 @@ import {
     FILTERS_ON,
     GET_DOGS,
     GET_DOG_DETAIL,
+    GET_DOG_NAMES,
     GET_TEMPERAMENTS,
     SET_PAGE,
     SET_SEARCH_NAME,
@@ -10,6 +11,7 @@ import {
 } from "./actions";
 
 const initialState = {
+    dogNames: [],
     units: "metric",
     currentPage: 1,
     createdDog: {},
@@ -25,6 +27,7 @@ const initialState = {
         totalCount: 0,
         temperaments: [],
     },
+    searchName: "",
 };
 function reducer(state = initialState, { type, payload }) {
     switch (type) {
@@ -68,6 +71,11 @@ function reducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 units: payload,
+            };
+        case GET_DOG_NAMES:
+            return {
+                ...state,
+                dogNames: payload,
             };
         default:
             return state;
