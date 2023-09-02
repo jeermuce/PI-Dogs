@@ -23,13 +23,6 @@ function noMatches(dog) {
         </div>
     );
 }
-function parseImageError(dog) {
-    const imageLinkEnd = dog.image.split("/").pop();
-    if (imageLinkEnd === ".jpg" || imageLinkEnd === ".png") {
-        return (dogImageError = "Image error");
-    }
-    return dog.image;
-}
 
 function dogFound(dog, units) {
     return (

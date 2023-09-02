@@ -30,10 +30,9 @@ async function getDogByName(name) {
 
         apiDogs = parseApiDogs(response.data, "dogsByName");
         const totalCount = apiDogs.length + parsedDbDogs.length;
-        !parsedDbDogs.length && (parsedDbDogs = ["No matches in database"]);
-        !apiDogs.length && (apiDogs = ["No matches in API"]);
-
-        dogs.sort();
+        !parsedDbDogs.length &&
+            !apiDogs.length &&
+            (parsedDbDogs = ["No matches"]);
 
         let totalDogs = [...parsedDbDogs, ...apiDogs];
 

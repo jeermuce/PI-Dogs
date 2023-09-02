@@ -80,7 +80,6 @@ function reducer(state = initialState, { type, payload }) {
             if (filteredDogs.length === 0) {
                 filteredDogs = ["No matches found"];
             }
-            filteredDogs = [...stringArray, ...filteredDogs];
             return {
                 ...state,
                 dogs: filteredDogs,
