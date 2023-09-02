@@ -75,7 +75,7 @@ function Filters() {
                     <option value="name">Name</option>
                     <option value="weight">Weight</option>
                 </select>
-                <button className="order-button" onClick={() => toggleOrder()}>
+                <button className="order-button" onClick={toggleOrder}>
                     {orderDirection ? "ASC" : "DESC"}
                 </button>
             </div>
