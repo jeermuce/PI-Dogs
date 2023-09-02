@@ -4,7 +4,6 @@ function validate(input, name, errors, setErrors, form) {
             empty: "mandatory",
             invalidFirstChar: "must start with a letter",
             overLong: "must be less than 50 characters",
-            mustStartWithLetter: "must start with a letter",
         },
         image: {
             empty: "mandatory",
@@ -13,39 +12,51 @@ function validate(input, name, errors, setErrors, form) {
         },
         height_low: {
             empty: "mandatory",
-            notNumber: "height_low must be a number",
+            notNumber: "must be a number",
             outOfRange: "must be positive",
-            lessThanHigh: "must be less than height_high",
+            lessThanHigh: "must be less than high",
+            mustBeInteger: "must be an integer",
+            overLong: "must be fewer than 4 digits",
         },
         height_high: {
             empty: "mandatory",
-            notNumber: "height_high must be a number",
+            notNumber: "must be a number",
             outOfRange: "must be positive",
-            moreThanLow: "must be more than height_low",
+            moreThanLow: "must be more than low",
+            mustBeInteger: "must be an integer",
+            overLong: "must be fewer than 4 digits",
         },
         weight_low: {
             empty: "mandatory",
-            notNumber: "weight_low must be a number",
+            notNumber: "must be a number",
             outOfRange: "must be positive",
-            lessThanHigh: "must be less than height_high",
+            lessThanHigh: "must be less than high",
+            mustBeInteger: "must be an integer",
+            overLong: "must be fewer than 4 digits",
         },
         weight_high: {
             empty: "mandatory",
-            notNumber: "weight_high must be a number",
+            notNumber: "must be a number",
             outOfRange: "must be positive",
-            moreThanLow: "must be more than height_low",
+            moreThanLow: "must be more than low",
+            mustBeInteger: "must be an integer",
+            overLong: "must be fewer than 4 digits",
         },
         life_span_low: {
             empty: "mandatory",
-            notNumber: "life_span_low must be a number",
+            notNumber: "must be a number",
             outOfRange: "must be positive",
-            lessThanHigh: "must be less than height_high",
+            lessThanHigh: "must be less than high",
+            mustBeInteger: "must be an integer",
+            overLong: "must be fewer than 4 digits",
         },
         life_span_high: {
             empty: "mandatory",
-            notNumber: "life_span_high must be a number",
+            notNumber: "must be a number",
             outOfRange: "must be positive",
-            moreThanLow: "must be more than height_low",
+            moreThanLow: "must be more than low",
+            mustBeInteger: "must be an integer",
+            overLong: "must be fewer than 4 digits",
         },
         temperaments: {
             empty: "pick/type one or more",
@@ -58,12 +69,10 @@ function validate(input, name, errors, setErrors, form) {
         case "name":
             if (input === "") {
                 errorMessage = errorMessages.name.empty;
-            } else if (input[0] < "A" || input[0] > "z") {
+            } else if (!/^[a-zA-Z]/.test(input)) {
                 errorMessage = errorMessages.name.invalidFirstChar;
             } else if (input.length > 50) {
                 errorMessage = errorMessages.name.overLong;
-            } else if (input[0] < "A" && input[0] > "z") {
-                errorMessage = errorMessages.name.mustStartWithLetter;
             }
 
             break;
@@ -83,57 +92,7 @@ function validate(input, name, errors, setErrors, form) {
             }
             break;
         case "height_low":
-            errorMessage = rangeGeneric(
-                input,
-                name,
-                errorMessage,
-                errorMessages
-            );
-            if (errorMessage === "") {
-                if (input > form.height_high && form.height_high !== "") {
-                    errorMessage = errorMessages.height_low.lessThanHigh;
-                }
-            }
-            break;
-
-        case "height_high":
-            errorMessage = rangeGeneric(
-                input,
-                name,
-                errorMessage,
-                errorMessages
-            );
-            if (errorMessage === "") {
-                if (input < form.height_low && form.height_low !== "") {
-                    errorMessage = errorMessages.height_high.moreThanLow;
-                }
-            }
         case "weight_low":
-            errorMessage = rangeGeneric(
-                input,
-                name,
-                errorMessage,
-                errorMessages
-            );
-            if (errorMessage === "") {
-                if (input > form.weight_high && form.weight_high !== "") {
-                    errorMessage = errorMessages.weight_low.lessThanHigh;
-                }
-            }
-            break;
-        case "weight_high":
-            errorMessage = rangeGeneric(
-                input,
-                name,
-                errorMessage,
-                errorMessages
-            );
-            if (errorMessage === "") {
-                if (input < form.weight_low && form.weight_low !== "") {
-                    errorMessage = errorMessages.weight_high.moreThanLow;
-                }
-            }
-            break;
         case "life_span_low":
             errorMessage = rangeGeneric(
                 input,
@@ -142,11 +101,14 @@ function validate(input, name, errors, setErrors, form) {
                 errorMessages
             );
             if (errorMessage === "") {
-                if (input > form.life_span_high && form.life_span_high !== "") {
-                    errorMessage = errorMessages.life_span_low.lessThanHigh;
+                const highValue = form[name.replace("_low", "_high")];
+                if (Number(input) > Number(highValue) && highValue !== "") {
+                    errorMessage = errorMessages[name].lessThanHigh;
                 }
             }
             break;
+        case "height_high":
+        case "weight_high":
         case "life_span_high":
             errorMessage = rangeGeneric(
                 input,
@@ -155,10 +117,12 @@ function validate(input, name, errors, setErrors, form) {
                 errorMessages
             );
             if (errorMessage === "") {
-                if (input < form.life_span_low && form.life_span_low !== "") {
-                    errorMessage = errorMessages.life_span_high.moreThanLow;
+                const lowValue = form[name.replace("_high", "_low")];
+                if (Number(input) < Number(lowValue) && lowValue !== "") {
+                    errorMessage = errorMessages[name].moreThanLow;
                 }
             }
+            break;
         case "temperaments":
             if (input === "") {
                 errorMessage = errorMessages.temperaments.empty;
@@ -179,10 +143,14 @@ export default validate;
 function rangeGeneric(input, name, errorMessage, errorMessages) {
     if (input === "") {
         errorMessage = errorMessages[name].empty;
+    } else if (input.length > 4) {
+        errorMessage = errorMessages[name].overLong;
     } else if (isNaN(input)) {
         errorMessage = errorMessages[name].notNumber;
     } else if (input < 0) {
         errorMessage = errorMessages[name].outOfRange;
+    } else if (input.includes(".")) {
+        errorMessage = errorMessages[name].mustBeInteger;
     }
     return errorMessage;
 }
