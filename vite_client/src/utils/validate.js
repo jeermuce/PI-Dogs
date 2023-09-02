@@ -1,9 +1,10 @@
-function validate(input, name, errors, setErrors, form) {
+function validate(input, name, errors, setErrors, form, allDogs) {
     const errorMessages = {
         name: {
             empty: "mandatory",
             invalidFirstChar: "must start with a letter",
             overLong: "must be less than 50 characters",
+            dogExists: "Dog already exists",
         },
         image: {
             empty: "mandatory",
@@ -64,6 +65,7 @@ function validate(input, name, errors, setErrors, form) {
     };
 
     let errorMessage = "";
+    let dogExists = false;
 
     switch (name) {
         case "name":
@@ -73,8 +75,16 @@ function validate(input, name, errors, setErrors, form) {
                 errorMessage = errorMessages.name.invalidFirstChar;
             } else if (input.length > 50) {
                 errorMessage = errorMessages.name.overLong;
+            } else {
+                allDogs.forEach((dog) => {
+                    if (dog.name === input) {
+                        dogExists = true;
+                    }
+                });
+                if (dogExists) {
+                    errorMessage = errorMessages.name.dogExists;
+                }
             }
-
             break;
         case "image":
             if (input === "") {

@@ -90,27 +90,6 @@ function Create() {
     }, [units]);
 
     useEffect(() => {
-        let dogExists = false;
-        if (
-            form.name === "" ||
-            form.name === " " ||
-            form.name === null ||
-            form.name === undefined
-        ) {
-            return;
-        }
-        allDogs.forEach((dog) => {
-            if (dog.toLowerCase() === form.name.toLowerCase()) {
-                dogExists = true;
-            }
-        });
-        setErrors((prevState) => {
-            let updatedState = { ...prevState };
-            updatedState.name = dogExists ? "Dog already exists" : "";
-            return updatedState;
-        });
-    }, [form]);
-    useEffect(() => {
         setForm({
             name: "",
             image: "",
@@ -201,7 +180,8 @@ function Create() {
                             setForm,
                             setErrors,
                             setCheckboxTemperaments,
-                            errors
+                            errors,
+                            allDogs
                         )
                     }
                     className="form-contents"
@@ -214,42 +194,6 @@ function Create() {
         </>
     );
 
-    function lastChild() {
-        return (
-            <div className="temperaments-menu">
-                {temperaments.map((temperament, index) => (
-                    <div
-                        className="checkbox"
-                        key={index}
-                        style={{
-                            backgroundColor: form.temperaments.includes(
-                                temperament
-                            )
-                                ? "var(--accent)"
-                                : "var(--background)",
-                        }}
-                    >
-                        <input
-                            disabled={disabledBecauseOfApiErrors()}
-                            style={{ display: "none" }}
-                            key={temperament}
-                            type="checkbox"
-                            name="temperaments"
-                            id={temperament}
-                            value={temperament}
-                        />
-                        <label
-                            key={index}
-                            className="label-attribute-temperament"
-                            htmlFor={temperament}
-                        >
-                            {temperament}
-                        </label>
-                    </div>
-                ))}
-            </div>
-        );
-    }
     function firstChild() {
         return (
             <div className="firstChild">
@@ -345,6 +289,42 @@ function Create() {
                         Submit
                     </button>
                 </div>
+            </div>
+        );
+    }
+    function lastChild() {
+        return (
+            <div className="temperaments-menu">
+                {temperaments.map((temperament, index) => (
+                    <div
+                        className="checkbox"
+                        key={index}
+                        style={{
+                            backgroundColor: form.temperaments.includes(
+                                temperament
+                            )
+                                ? "var(--accent)"
+                                : "var(--background)",
+                        }}
+                    >
+                        <input
+                            disabled={disabledBecauseOfApiErrors()}
+                            style={{ display: "none" }}
+                            key={temperament}
+                            type="checkbox"
+                            name="temperaments"
+                            id={temperament}
+                            value={temperament}
+                        />
+                        <label
+                            key={index}
+                            className="label-attribute-temperament"
+                            htmlFor={temperament}
+                        >
+                            {temperament}
+                        </label>
+                    </div>
+                ))}
             </div>
         );
     }

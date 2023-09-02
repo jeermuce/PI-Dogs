@@ -6,9 +6,12 @@ function createDogHandleChange(
     setForm,
     setErrors,
     setCheckboxTemperaments,
-    errors
+    errors,
+    allDogs
 ) {
     let { name, value, type, checked } = event.target;
+    validate(value, name, errors, setErrors, form, allDogs);
+
     switch (name) {
         case "temperaments":
             type === "checkbox" && checked
@@ -61,7 +64,6 @@ function createDogHandleChange(
             });
             break;
     }
-    validate(value, name, errors, setErrors, form);
 }
 
 export default createDogHandleChange;
