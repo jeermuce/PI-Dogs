@@ -10,7 +10,7 @@ require("./db.js");
 const server = express();
 
 const corsOptions = {
-    origin: `http://localhost:5173` || `http://localhost:4173`, //TODO: add deployed client URL
+    origin: `*`, //TODO: add deployed client URL
 };
 
 server.name = "API";
