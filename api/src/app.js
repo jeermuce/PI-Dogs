@@ -9,15 +9,19 @@ require("./db.js");
 
 const server = express();
 
+const corsOptions = {
+    origin: `http://localhost:5173` || `http://localhost:4173`, //TODO: add deployed client URL
+};
+
 server.name = "API";
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
-server.use(cors());
+server.use(cors(corsOptions));
 /* server.use((req, res, next) => {
-    const allowedOrigins = ["*"]; // TODO: replace with deployed client URL
+    const allowedOrigins = ["*"]; 
 
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
