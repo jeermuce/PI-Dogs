@@ -83,49 +83,79 @@ function validate(input, name, errors, setErrors, form) {
             }
             break;
         case "height_low":
-            errorMessage = rangeGeneric(input, name);
+            errorMessage = rangeGeneric(
+                input,
+                name,
+                errorMessage,
+                errorMessages
+            );
             if (errorMessage === "") {
-                if (input > form.height_high) {
+                if (input > form.height_high && form.height_high !== "") {
                     errorMessage = errorMessages.height_low.lessThanHigh;
                 }
             }
             break;
 
         case "height_high":
-            errorMessage = rangeGeneric(input, name);
+            errorMessage = rangeGeneric(
+                input,
+                name,
+                errorMessage,
+                errorMessages
+            );
             if (errorMessage === "") {
-                if (input < form.height_low) {
+                if (input < form.height_low && form.height_low !== "") {
                     errorMessage = errorMessages.height_high.moreThanLow;
                 }
             }
         case "weight_low":
-            errorMessage = rangeGeneric(input, name);
+            errorMessage = rangeGeneric(
+                input,
+                name,
+                errorMessage,
+                errorMessages
+            );
             if (errorMessage === "") {
-                if (input > form.weight_high) {
+                if (input > form.weight_high && form.weight_high !== "") {
                     errorMessage = errorMessages.weight_low.lessThanHigh;
                 }
             }
             break;
         case "weight_high":
-            errorMessage = rangeGeneric(input, name);
+            errorMessage = rangeGeneric(
+                input,
+                name,
+                errorMessage,
+                errorMessages
+            );
             if (errorMessage === "") {
-                if (input < form.weight_low) {
+                if (input < form.weight_low && form.weight_low !== "") {
                     errorMessage = errorMessages.weight_high.moreThanLow;
                 }
             }
             break;
         case "life_span_low":
-            errorMessage = rangeGeneric(input, name);
+            errorMessage = rangeGeneric(
+                input,
+                name,
+                errorMessage,
+                errorMessages
+            );
             if (errorMessage === "") {
-                if (input > form.life_span_high) {
+                if (input > form.life_span_high && form.life_span_high !== "") {
                     errorMessage = errorMessages.life_span_low.lessThanHigh;
                 }
             }
             break;
         case "life_span_high":
-            errorMessage = rangeGeneric(input, name);
+            errorMessage = rangeGeneric(
+                input,
+                name,
+                errorMessage,
+                errorMessages
+            );
             if (errorMessage === "") {
-                if (input < form.life_span_low) {
+                if (input < form.life_span_low && form.life_span_low !== "") {
                     errorMessage = errorMessages.life_span_high.moreThanLow;
                 }
             }
@@ -146,7 +176,7 @@ function validate(input, name, errors, setErrors, form) {
 
 export default validate;
 
-function rangeGeneric(input, name) {
+function rangeGeneric(input, name, errorMessage, errorMessages) {
     if (input === "") {
         errorMessage = errorMessages[name].empty;
     } else if (isNaN(input)) {

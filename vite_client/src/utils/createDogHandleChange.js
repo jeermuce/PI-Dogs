@@ -61,7 +61,7 @@ function createDogHandleChange(
             });
             break;
     }
-    validate(value, name, errors, setErrors);
+    validate(value, name, errors, setErrors, form);
 }
 
 export default createDogHandleChange;
