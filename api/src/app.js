@@ -10,7 +10,7 @@ require("./db.js");
 const server = express();
 
 const corsOptions = {
-    origin: `*`, //TODO: add deployed client URL
+    origin: `https://pi-dogs-beta-two.vercel.app`, //TODO: add deployed client URL
 };
 
 server.name = "API";
