@@ -1,4 +1,4 @@
-const { Temperament } = require("../db");
+const { Temperament } = require("../db.js");
 
 async function getTemperamentsFromDb() {
     const temperaments = await Temperament.findAll({

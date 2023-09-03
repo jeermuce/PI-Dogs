@@ -1,6 +1,6 @@
-const { parseDbDog } = require("../../utils/parseDbDog");
-const { parseApiDog } = require("../../utils/parseApiDogs");
-const { axiosCaller } = require("../../utils/axiosCaller");
+const { parseDbDog } = require("../../utils/parseDbDog.js");
+const { parseApiDog } = require("../../utils/parseApiDogs.js");
+const { axiosCaller } = require("../../utils/axiosCaller.js");
 const { Dog, Temperament } = require("../../db");
 
 async function getDogById(id) {

@@ -4,7 +4,7 @@ const {
     getAllHandler,
     getByIdHandler,
     getByNameHandler,
-} = require("../handlers/dogsHandler");
+} = require("../handlers/dogsHandler.js");
 
 const dogsRouter = Router();
 

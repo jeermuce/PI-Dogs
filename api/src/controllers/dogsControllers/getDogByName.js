@@ -2,7 +2,7 @@ const { Dog, Temperament } = require("../../db");
 const { parseDbDog } = require("../../utils/parseDbDog");
 const { axiosCaller } = require("../../utils/axiosCaller");
 const { Op } = require("sequelize");
-const { parseApiDogs } = require("../../utils/parseApiDogs");
+const { parseApiDogs } = require("../../utils/parseApiDogs.js");
 
 async function getDogByName(name) {
     try {
