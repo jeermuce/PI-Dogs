@@ -65,15 +65,11 @@ function reducer(state = initialState, { type, payload }) {
             if (attribute === "weight") {
                 if (order) {
                     filteredDogs = filteredDogs.sort(
-                        (a, b) =>
-                            parseWeight(a.weight).min -
-                            parseWeight(b.weight).min
+                        (a, b) => parseWeight(a.weight) - parseWeight(b.weight)
                     );
                 } else {
                     filteredDogs = filteredDogs.sort(
-                        (a, b) =>
-                            parseWeight(b.weight).max -
-                            parseWeight(a.weight).max
+                        (a, b) => parseWeight(b.weight) - parseWeight(a.weight)
                     );
                 }
             }

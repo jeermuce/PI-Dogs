@@ -1,12 +1,15 @@
 function parseWeight(weight) {
-    if (weight.includes("-")) {
-        const min = parseInt(weight.split("-")[0]);
-        const max = parseInt(weight.split("-")[1]);
-        return { min, max };
-    } else {
-        const min = parseInt(weight);
-        const max = parseInt(weight);
-        return { min, max };
+    //returns the average weight of a dog
+    //dog may have "a - b" or "a" or "" as its weight
+    if (weight) {
+        if (weight.includes("-")) {
+            const weights = weight.split("-");
+            const average = (Number(weights[0]) + Number(weights[1])) / 2;
+            return average;
+        } else {
+            return Number(weight);
+        }
     }
+    return 0;
 }
 export default parseWeight;

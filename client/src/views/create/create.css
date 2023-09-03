@@ -1,5 +1,6 @@
 .form-contents {
     --input-bar-width: 50%;
+    background-image: url("../../assets/wood.png");
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -11,12 +12,10 @@
     margin-top: 2rem;
     border-radius: 1rem;
     padding: 2rem;
-
-    background-image: var(--background-image);
 }
 .form-contents > :first-child {
-    background-color: var(--background-dark);
-    color: var(--text-dark);
+    background-color: var(--background);
+    color: var(--text);
     flex-basis: 0;
     height: 14rem;
     flex-basis: 500px;

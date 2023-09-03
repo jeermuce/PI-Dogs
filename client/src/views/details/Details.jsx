@@ -26,6 +26,8 @@ function Details() {
         weight_imperial,
         temperaments,
     } = dog;
+    if (dog.temperaments) {
+    }
     return (
         <div className="details-page">
             <Navbar />

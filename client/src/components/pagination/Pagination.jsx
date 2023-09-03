@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./pagination.css";
 import { setPage } from "../../redux/actions";
-function Pagination() {
+function Pagination({ cardsPerPage }) {
     const dispatch = useDispatch();
     const pageState = useSelector((state) => state.reducer.currentPage);
     let totalCount = useSelector((state) => state.reducer.count);
-    const totalPages = Math.ceil(totalCount / 8) || 1;
+    const totalPages = Math.ceil(totalCount / cardsPerPage) || 1;
     const pages = [];
     const [currentPage, setCurrentPage] = useState(pageState);
 

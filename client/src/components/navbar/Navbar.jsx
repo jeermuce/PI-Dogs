@@ -1,11 +1,13 @@
 import React from "react";
 import "./navbar.css";
-import { Link, useLocation } from "react-router-dom";
-import paw from "../../assets/paw.png";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import bone from "../../assets/bone.png";
 import Searchbar from "../searchbar/Searchbar";
 import { useDispatch, useSelector } from "react-redux";
 import { createDog, toggleFilters, toggleUnits } from "../../redux/actions";
 import home from "../../assets/home_symbol.svg";
+import funnel from "../../assets/funnel.svg";
+import plus from "../../assets/plus_symbol.svg";
 import { getDogDetail } from "../../redux/actions";
 function Navbar() {
     const unitBool = useSelector((state) => state.reducer.units);
@@ -25,13 +27,10 @@ function Navbar() {
 
     return (
         <div className="navbar">
-            <Link to="/">
-                <img src={paw} alt="logo" className="paw-logo-navbar" />
-            </Link>
-            <Link to="/">
-                <p>Landing</p>
-            </Link>
-            <ul className="navbar-links">
+            <div className="navbar-links">
+                <NavLink to="/" className="landing-link">
+                    <img src={bone} alt="logo" className="bone-logo-navbar" />
+                </NavLink>
                 {location !== "/home" && (
                     <Link to="/home">
                         <button className="navbar-button" onClick={handleClick}>
@@ -43,45 +42,70 @@ function Navbar() {
                         </button>
                     </Link>
                 )}
-
+            </div>
+            <div className="center-navbar">
+                <Searchbar />
                 <Link
                     to="/create"
                     onClick={() => {
                         dispatch(createDog());
                     }}
                 >
-                    <button className="navbar-button">Create</button>
+                    <button className="navbar-button">
+                        <img src={plus} alt="Create" className="navbar-icon" />
+                    </button>
                 </Link>
-            </ul>
-            <Searchbar />
-            <ul className="navbar-links">
-                <li>
-                    <button
-                        className="unit-button"
-                        style={
-                            unitBool
-                                ? { backgroundColor: "var(--secondary)" }
-                                : { backgroundColor: "var(--background)" }
-                        }
-                        onClick={handleUnitToggle}
+            </div>
+            <div className="right-navbar">
+                <div className="navbar-toggle-list">
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexFlow: "row nowrap",
+                            marker: "none",
+                        }}
                     >
-                        Units: {unitBool ? "SI" : "US"}
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className="filter-button-navbar"
-                        style={
-                            filtersOn
-                                ? { backgroundColor: "var(--accent)" }
-                                : { backgroundColor: "var(--secondary)" }
-                        }
-                        onClick={handleFiltersToggle}
-                    >
-                        Filters
-                    </button>
-                </li>
-            </ul>
+                        <label htmlFor="unit-button">Units:</label>
+                        <button
+                            className="unit-button"
+                            style={
+                                unitBool
+                                    ? {
+                                          backgroundColor: "var(--secondary)",
+                                          aspectRatio: "1/1",
+                                      }
+                                    : {
+                                          backgroundColor: "var(--background)",
+                                          aspectRatio: "1/1",
+                                      }
+                            }
+                            onClick={handleUnitToggle}
+                        >
+                            {unitBool ? "SI" : "US"}
+                        </button>
+                    </div>
+
+                    <div>
+                        <button
+                            className="filter-button-navbar"
+                            style={
+                                filtersOn
+                                    ? { backgroundColor: "var(--accent)" }
+                                    : { backgroundColor: "var(--secondary)" }
+                            }
+                            onClick={handleFiltersToggle}
+                        >
+                            <img
+                                className="navbar-icon"
+                                src={funnel}
+                                alt="filter-symbol"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

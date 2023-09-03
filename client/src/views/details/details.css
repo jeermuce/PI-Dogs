@@ -1,7 +1,7 @@
 .details-page {
     height: 100vh;
     grid-template-areas: "navbar" "details-container";
-    grid-template-rows: 2rem 1fr;
+    grid-template-rows: 3rem 1fr;
     grid-template-columns: 1fr;
     display: grid;
 
@@ -52,13 +52,15 @@
     flex-grow: 9999;
 }
 .details-dog-image-container /* last child */ {
-    flex-basis: 15rem;
+    flex-basis: 13rem;
     overflow: hidden;
+
     flex-grow: 1;
 }
 .details-dog-image {
     border-radius: 0.6rem;
     width: 100%;
+
     height: 100%;
     aspect-ratio: 1;
     object-fit: cover;

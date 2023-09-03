@@ -16,6 +16,7 @@ function Home() {
     const filters = useSelector((state) => state.reducer.filters);
     const pageState = useSelector((state) => state.reducer.currentPage);
     const createdDog = useSelector((state) => state.reducer.createdDog);
+    const cardsPerPage = 12;
     const [pageDogs, setPageDogs] = useState([]);
     useEffect(() => {
         !count && dispatch(getDogs());
@@ -46,7 +47,9 @@ function Home() {
     }, [createdDog]);
 
     useEffect(() => {
-        setPageDogs(dogs.slice((pageState - 1) * 8, pageState * 8));
+        setPageDogs(
+            dogs.slice((pageState - 1) * cardsPerPage, pageState * cardsPerPage)
+        );
     }, [dogs, pageState, searchName]);
 
     useEffect(() => {
@@ -61,13 +64,13 @@ function Home() {
             ) : (
                 <div
                     style={{
-                        height: "0",
+                        height: "0rem",
                     }}
                 ></div>
             )}
 
             <Cards dogs={pageDogs} />
-            <Pagination />
+            <Pagination cardsPerPage={cardsPerPage} />
         </div>
     );
 }

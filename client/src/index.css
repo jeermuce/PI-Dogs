@@ -1,5 +1,9 @@
 :root {
-    --background-image: url("G:/PI/40b/mine/PI-Dogs-main/vite_client/src/assets/wood.png");
+    --background-image: url("./assets/wood.png");
+    --card-border-radius: 0.6rem;
+    --card-padding: 1rem;
+    --card-height: 11rem;
+    --card-width: 10rem;
     /************* Light Palette *************/
 
     --text-light: #000;

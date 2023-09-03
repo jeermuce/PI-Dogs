@@ -76,11 +76,9 @@ function validate(input, name, errors, setErrors, form, allDogs) {
             } else if (input.length > 50) {
                 errorMessage = errorMessages.name.overLong;
             } else {
-                allDogs.forEach((dog) => {
-                    if (dog.name === input) {
-                        dogExists = true;
-                    }
-                });
+                dogExists = allDogs.some(
+                    (dog) => dog.toLowerCase() === input.toLowerCase()
+                );
                 if (dogExists) {
                     errorMessage = errorMessages.name.dogExists;
                 }
