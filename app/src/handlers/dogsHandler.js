@@ -8,6 +8,7 @@ const { dogBodyParser } = require("../utils/dogBodyParser.js");
 let aDogHasBeenCreated = false;
 async function getByIdHandler(req, res) {
     try {
+        console.log("getByIdHandler");
         const id = req.params.id;
         const dog = await getDogById(id);
         return res.status(200).json(dog);

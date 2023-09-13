@@ -4,6 +4,7 @@ const { axiosCaller } = require("../../utils/axiosCaller.js");
 const { Dog, Temperament } = require("../../db");
 
 async function getDogById(id) {
+    console.log("getDogById");
     try {
         if (isNaN(id)) {
             let dog = await Dog.findByPk(id, {
