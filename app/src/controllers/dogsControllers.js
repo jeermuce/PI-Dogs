@@ -1,4 +1,4 @@
-const { getDogById } = require("./getDogById");
+const { getDogByID } = require("./getDogByID");
 const { getDogByName } = require("./getDogByName");
 const { createDog } = require("./createDog");
 const { getAllDogs } = require("./getAllDogs");
@@ -6,6 +6,6 @@ const { getAllDogs } = require("./getAllDogs");
 module.exports = {
     getAllDogs,
     createDog,
-    getDogById,
+    getDogByID,
     getDogByName,
 };

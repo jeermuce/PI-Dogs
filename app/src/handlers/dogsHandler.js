@@ -1,7 +1,7 @@
 const {
     getAllDogs,
     createDog,
-    getDogById,
+    getDogByID,
     getDogByName,
 } = require("../controllers/dogsControllers.js");
 const { dogBodyParser } = require("../utils/dogBodyParser.js");
@@ -10,7 +10,7 @@ async function getByIdHandler(req, res) {
     try {
         console.log("getByIdHandler");
         const id = req.params.id;
-        const dog = await getDogById(id);
+        const dog = await getDogByID(id);
         return res.status(200).json(dog);
     } catch (error) {
         return res.status(400).send({ error: error.message });

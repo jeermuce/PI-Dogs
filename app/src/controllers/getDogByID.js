@@ -3,8 +3,8 @@ const { parseApiDog } = require("../utils/parseApiDogs");
 const { axiosCaller } = require("../utils/axiosCaller");
 const { Dog, Temperament } = require("../db");
 
-async function getDogById(id) {
-    console.log("getDogById");
+async function getDogByID(id) {
+    console.log("getDogByID");
     try {
         if (isNaN(id)) {
             let dog = await Dog.findByPk(id, {
@@ -31,5 +31,5 @@ async function getDogById(id) {
 }
 
 module.exports = {
-    getDogById,
+    getDogByID,
 };
