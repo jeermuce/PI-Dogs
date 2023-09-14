@@ -1,6 +1,6 @@
 const {
     getAllTemperaments,
-} = require("./temperamentsControllers/getAllTemperaments.js");
+} = require("./getAllTemperaments.js");
 
 module.exports = {
     getAllTemperaments,

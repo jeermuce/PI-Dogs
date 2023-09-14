@@ -1,7 +1,7 @@
-const { parseDbDog } = require("../../utils/parseDbDog.js");
-const { parseApiDog } = require("../../utils/parseApiDogs.js");
-const { axiosCaller } = require("../../utils/axiosCaller.js");
-const { Dog, Temperament } = require("../../db");
+const { parseDbDog } = require("../utils/parseDbDog.js");
+const { parseApiDog } = require("../utils/parseApiDogs.js");
+const { axiosCaller } = require("../utils/axiosCaller.js");
+const { Dog, Temperament } = require("../db.js");
 
 async function getDogById(id) {
     console.log("getDogById");
@@ -20,7 +20,7 @@ async function getDogById(id) {
             return dog;
         }
         const response = await axiosCaller("id", id);
-        
+
         if (Object.keys(response.data).length === 0) {
             throw new Error(`Dog with id ${id} not found`);
         }

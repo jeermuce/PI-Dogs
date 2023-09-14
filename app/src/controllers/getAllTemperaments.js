@@ -1,7 +1,7 @@
-const { Temperament } = require("../../db.js");
-const { parseApiDogs } = require("../../utils/parseApiDogs.js");
-const { axiosCaller } = require("../../utils/axiosCaller.js");
-const { getTemperamentsFromDb } = require("../../utils/getTemperamentsFromDb.js");
+const { Temperament } = require("../db.js");
+const { parseApiDogs } = require("../utils/parseApiDogs.js");
+const { axiosCaller } = require("../utils/axiosCaller.js");
+const { getTemperamentsFromDb } = require("../utils/getTemperamentsFromDb.js");
 
 let isFirstRun = true;
 async function getAllTemperaments() {

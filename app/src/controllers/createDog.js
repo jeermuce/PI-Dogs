@@ -1,6 +1,6 @@
-const { Dog, Temperament } = require("../../db");
-const { parseDbDog } = require("../../utils/parseDbDog.js");
-const { addTemperamentsToDog } = require("../../utils/addTemperamentsToDog.js");
+const { Dog, Temperament } = require("../db");
+const { parseDbDog } = require("../utils/parseDbDog.js");
+const { addTemperamentsToDog } = require("../utils/addTemperamentsToDog.js");
 
 async function createDog(dog, aDogHasBeenCreated) {
     try {
