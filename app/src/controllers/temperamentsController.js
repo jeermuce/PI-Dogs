@@ -1,4 +1,6 @@
-const { getAllTemperaments } = require("./getAllTemperaments");
+const {
+    getAllTemperaments,
+} = require("./temperamentsControllers/getAllTemperaments");
 
 module.exports = {
     getAllTemperaments,

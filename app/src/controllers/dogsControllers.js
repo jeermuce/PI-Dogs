@@ -1,7 +1,7 @@
-const { getDogByID } = require("./getDogByID");
-const { getDogByName } = require("./getDogByName");
-const { createDog } = require("./createDog");
-const { getAllDogs } = require("./getAllDogs");
+const { getDogByID } = require("./dogsControllers/getDogByID");
+const { getDogByName } = require("./dogsControllers/getDogByName");
+const { createDog } = require("./dogsControllers/createDog");
+const { getAllDogs } = require("./dogsControllers/getAllDogs");
 
 module.exports = {
     getAllDogs,

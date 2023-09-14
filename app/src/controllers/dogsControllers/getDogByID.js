@@ -1,7 +1,7 @@
-const { parseDbDog } = require("../utils/parseDbDog");
-const { parseApiDog } = require("../utils/parseApiDogs");
-const { axiosCaller } = require("../utils/axiosCaller");
-const { Dog, Temperament } = require("../db");
+const { parseDbDog } = require("../../utils/parseDbDog");
+const { parseApiDog } = require("../../utils/parseApiDogs");
+const { axiosCaller } = require("../../utils/axiosCaller");
+const { Dog, Temperament } = require("../../db");
 
 async function getDogByID(id) {
     console.log("getDogByID");
