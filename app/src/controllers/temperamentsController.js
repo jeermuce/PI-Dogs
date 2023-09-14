@@ -1,6 +1,4 @@
-const {
-    getAllTemperaments,
-} = require("./getAllTemperaments.js");
+const { getAllTemperaments } = require("./getAllTemperaments");
 
 module.exports = {
     getAllTemperaments,

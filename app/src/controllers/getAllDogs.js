@@ -1,7 +1,7 @@
-const { Dog, Temperament } = require("../db.js");
-const { parseApiDogs } = require("../utils/parseApiDogs.js");
-const { parseDbDog } = require("../utils/parseDbDog.js");
-const { axiosCaller } = require("../utils/axiosCaller.js");
+const { Dog, Temperament } = require("../db");
+const { parseApiDogs } = require("../utils/parseApiDogs");
+const { parseDbDog } = require("../utils/parseDbDog");
+const { axiosCaller } = require("../utils/axiosCaller");
 
 let dogCache = 0;
 let apiCache = 0;
