@@ -1,19 +1,19 @@
-.box {
-    height: 100%;
-    width: 100%;
-    scrollbar-width: thin;
+.container {
+    flex: 1 1 0%;
+    padding: 3rem 0 3rem 0;
 
-    overflow-y: scroll;
-    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+
+}
+
+.box {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 80ch;
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(min(var(--card-width), 80%), 1fr)
-    );
-    grid-template-rows: repeat(
-        auto-fit,
-        minmax(min(var(--card-height), 80%), var(--card-height))
-    );
-    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
     gap: 1rem;
 }

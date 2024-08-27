@@ -3,24 +3,25 @@
     padding: var(--card-padding);
     box-sizing: border-box;
     height: var(--card-height);
-    position: relative;
+
     display: flex;
     gap: 0;
     flex-flow: column nowrap;
     justify-content: start;
     align-items: center;
+    max-width: 7rem;
     background-image: var(--background-image);
     transition: scale 0.2s ease-in-out;
     overflow: hidden;
+    aspect-ratio: 0.6;
     transition: transform 0.2s ease-in-out;
 }
+
 .card-contents-container {
     border-radius: calc(1rem - 0.6rem);
-    background-color: red;
     overflow: hidden;
     width: 100%;
     height: 100%;
-
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -30,6 +31,7 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 .card:hover {
     z-index: 999999;
     cursor: pointer;
@@ -47,6 +49,7 @@
     object-position: top;
     margin-bottom: 0rem;
 }
+
 .card-data {
     margin: 0;
     border: 0;
@@ -62,8 +65,9 @@
     text-align: center;
     box-sizing: border-box;
 }
+
 /* for h1 and p of card-data */
-.card-data > * {
+.card-data>* {
     font-size: 1rem;
     margin: 0;
     padding: 0;

@@ -8,6 +8,7 @@
     --card_width: 10rem;
     --card_height: 17rem;
 }
+
 .App {
     width: 100vw;
     max-width: 100%;
@@ -15,12 +16,14 @@
     max-height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #dbc9ac;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
     box-sizing: border-box;
 }
+
 button {
     color: var(--text);
     border: none;
@@ -42,33 +45,41 @@ button {
     border: none;
     border-radius: 0.3rem;
 }
+
 button:hover {
     background-color: var(--accent);
     color: var(--text);
 }
+
 button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
 .button-s {
     background-color: var(--secondary);
 }
+
 .button-s:hover {
     background-color: var(--secondary-hover);
 }
+
 a {
     color: var(--text);
     transition: color 0.2s ease-in-out;
     text-decoration: none;
 }
+
 a:hover {
     color: blue;
     text-decoration: underline;
 }
+
 .empty-div-nav-spacer {
     grid-area: nav;
     height: 2rem;
 }
+
 .unitButton {
     background-color: var(--primary);
     color: var(--text);
@@ -79,6 +90,7 @@ a:hover {
     cursor: pointer;
     transition: scale 0.2s ease-in-out;
 }
+
 .unitButton:hover {
     background-color: var(--accent);
     color: var(--text-hover);

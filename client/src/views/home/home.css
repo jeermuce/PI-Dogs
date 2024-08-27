@@ -1,17 +1,11 @@
 .home-page {
-    overflow: hidden;
     max-height: fit-content;
     height: 100vh;
     max-width: 100%;
-
+    position: relative;
     width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr;
-    max-height: 100%;
-    grid-template-rows: 2.5rem max-content 1fr 2rem;
-    grid-template-areas:
-        "navbar"
-        "filters"
-        "cards"
-        "pagination";
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
 }

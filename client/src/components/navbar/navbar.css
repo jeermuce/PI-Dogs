@@ -1,15 +1,23 @@
 .navbar {
     grid-area: navbar;
     height: 2.5rem;
-    max-height: 100%;
-    width: 100vw;
-    max-width: 100%;
+    max-width: 80ch;
+    width: 80%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     gap: 0rem;
     align-items: center;
-    background-color: var(--primary);
+}
+
+nav {
+    background-color: var(--secondary);
+    max-height: 100%;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
 }
 
 .navbar-toggle-list {
@@ -22,6 +30,7 @@
     width: fit-content;
     gap: 1rem;
 }
+
 .center-navbar {
     display: flex;
     flex-flow: row nowrap;
@@ -30,6 +39,7 @@
     gap: 1rem;
     width: fit-content;
 }
+
 .landing-link {
     box-sizing: border-box;
     margin: 1rem;
@@ -41,6 +51,7 @@
     align-items: center;
     gap: 1rem;
 }
+
 .navbar-links {
     box-sizing: border-box;
     max-height: 100%;
@@ -52,6 +63,7 @@
     gap: 1rem;
     width: fit-content;
 }
+
 @media (orientation: landscape) {
     .navbar {
         gap: 1rem;
@@ -60,16 +72,19 @@
 
 .filter-button-navbar {
     min-width: fit-content;
+
     color: var(--text);
     border: none;
     height: 1.7rem;
     cursor: pointer;
     transition: scale 0.2s ease-in-out;
 }
+
 .filter-button-navbar:hover {
     color: var(--text-hover);
     scale: 1.1;
 }
+
 .bone-logo-navbar {
     box-sizing: border-box;
     margin: none;
@@ -86,10 +101,12 @@
     cursor: pointer;
     transition: scale 0.2s ease-in-out;
 }
+
 .unit-button:hover {
     color: var(--text-hover);
     scale: 1.1;
 }
+
 .navbar-button {
     max-height: 2rem;
     aspect-ratio: 1/1;

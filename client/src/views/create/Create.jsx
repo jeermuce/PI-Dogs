@@ -169,7 +169,7 @@ function Create() {
     return (
         <>
             <Navbar />
-            <div className="container">
+            <div className="creation-form">
                 <h1 className="create-title">Create a dog</h1>
                 <form
                     onSubmit={handleSubmit}

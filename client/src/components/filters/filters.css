@@ -1,8 +1,9 @@
 .filters {
-    grid: filters;
     justify-self: center;
+    translate: 0rem 3rem;
     height: 2rem;
-    width: fit-content;
+    z-index: 999999;
+    width: 80ch;
     background-color: var(--accent);
     border-radius: 1rem;
     text-align: center;
@@ -11,5 +12,6 @@
     justify-content: center;
     align-items: center;
     padding: 0 0.5rem 0 0.5rem;
+    position: absolute;
     gap: 1rem;
 }
