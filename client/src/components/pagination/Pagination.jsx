@@ -26,40 +26,42 @@ function Pagination({ cardsPerPage }) {
     function handlePageChange(e) {
         setCurrentPage(e.target.value);
     }
-    function pageButtonsGenerator() {
+    function pageButtonsGenerator(maxButtons) {
         function renderPageButton(page, currentPage, totalPages) {
-            if (currentPage > totalPages - 2 && page >= totalPages - 4) {
+            if (currentPage > totalPages - Math.ceil(maxButtons / 2) && page >= totalPages - maxButtons + 1) {
                 return true;
             }
-            if (currentPage < 3 && page <= 5) {
+            if (currentPage < Math.ceil(maxButtons / 2) && page <= maxButtons) {
                 return true;
             }
-            if (currentPage - page > 2 || page - currentPage > 2) {
-                return false;
+            if (Math.abs(currentPage - page) < Math.ceil(maxButtons / 2)) {
+                return true;
             }
-            return true;
+            return false;
         }
+
         const pagesToRender = pages.filter((page) =>
             renderPageButton(page, currentPage, totalPages)
         );
+
         return pagesToRender.map((page, index) => {
             return (
                 <button
                     onClick={handlePageChange}
                     key={index}
                     value={page}
-                    className={
-                        page == currentPage ? "active-page" : "inactive-page"
-                    }
+                    className={`${page == currentPage ? "active-page" : "inactive-page"} item`}
                 >
                     {page}
-                </button>
+                </button >
             );
         });
     }
+
     return (
         <div className="pagination">
             <button
+                className="item"
                 onClick={handlePageChange}
                 value={1}
                 disabled={currentPage == 1}
@@ -67,21 +69,22 @@ function Pagination({ cardsPerPage }) {
                 {"<<"}
             </button>
             <button
+                className="item"
                 onClick={handlePageChange}
                 value={currentPage - 1}
                 disabled={currentPage == 1}
             >
                 {"<"}
             </button>
-            <div className="numbered-pages">{pageButtonsGenerator()}</div>
-            <button
+            {pageButtonsGenerator(7)}
+            <button className="item"
                 onClick={handlePageChange}
                 value={+currentPage + 1}
                 disabled={currentPage == totalPages}
             >
                 {">"}
             </button>
-            <button
+            <button className="item"
                 onClick={handlePageChange}
                 value={+totalPages}
                 disabled={currentPage == totalPages}

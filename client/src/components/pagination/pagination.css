@@ -7,18 +7,67 @@
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+
+
 }
+
 .pagination button {
     height: 2rem;
     min-width: 2rem;
     width: fit-content;
 }
+
 .active-page {
     background-color: var(--accent);
     cursor: default;
     color: var(--text);
 }
+
 .inactive-page {
     background-color: var(--background);
     color: var(--text);
+}
+
+.pagination {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.pagination .item {
+    transition: 500ms;
+    transform: translateZ(0px);
+}
+
+.pagination .item:has(+*+*:hover) {
+    /* leftmost button */
+    background-color: rgba(128, 128, 128, 1);
+    filter: brightness(0.6);
+    transform: translateZ(40px) rotateY('20deg');
+}
+
+.pagination .item:has(+*:hover) {
+    /* middle left button */
+    background-color: rgba(128, 128, 128, 1);
+    filter: brightness(0.8);
+    transform: translateZ(45px) rotateY('40deg');
+}
+
+.pagination .item:hover {
+    /* center button */
+    filter: brightness(1.2);
+    transform: translateZ(50px);
+}
+
+.pagination .item:hover+* {
+    /* middle right button */
+    background-color: rgba(128, 128, 128, 1);
+    filter: brightness(0.8);
+    transform: translateZ(45px) rotateY('40deg');
+}
+
+.pagination .item:hover+*+* {
+    /* rightmost button */
+    background-color: rgba(128, 128, 128, 1);
+    filter: brightness(0.6);
+    transform: translateZ(40px) rotateY('20deg');
 }
